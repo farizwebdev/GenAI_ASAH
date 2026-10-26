@@ -1,6 +1,7 @@
 """Skema Pydantic untuk permintaan dan respon chat sesuai PRD Bagian 8."""
 
 from typing import Any
+
 from pydantic import BaseModel, Field
 
 from app.schemas.common import ChannelEnum, IntentEnum, RouteEnum
@@ -10,12 +11,31 @@ from app.schemas.order import ExtractedOrder
 class ChatMeta(BaseModel):
     """Metadata eksekusi untuk pencatatan dan evaluasi teknis."""
 
-    model_version: str | None = Field(default=None, description="Versi model intent yang digunakan")
-    prompt_version: str | None = Field(default=None, description="Versi template prompt sistem")
-    latency_ms: int = Field(default=0, ge=0, description="Waktu respons layanan dalam milidetik")
-    fallback_used: bool = Field(default=False, description="Apakah fallback digunakan jika AI gagal")
-    low_confidence: bool = Field(default=False, description="Apakah keyakinan model di bawah ambang batas")
-    sentiment: str | None = Field(default=None, description="Sentimen pesan pelanggan (fitur P2)")
+    model_version: str | None = Field(
+        default=None,
+        description="Versi model intent yang digunakan",
+    )
+    prompt_version: str | None = Field(
+        default=None,
+        description="Versi template prompt sistem",
+    )
+    latency_ms: int = Field(
+        default=0,
+        ge=0,
+        description="Waktu respons layanan dalam milidetik",
+    )
+    fallback_used: bool = Field(
+        default=False,
+        description="Apakah fallback digunakan jika AI gagal",
+    )
+    low_confidence: bool = Field(
+        default=False,
+        description="Apakah keyakinan model di bawah ambang batas",
+    )
+    sentiment: str | None = Field(
+        default=None,
+        description="Sentimen pesan pelanggan (fitur P2)",
+    )
 
 
 class ChatAction(BaseModel):

@@ -3,7 +3,6 @@
 import logging
 import sys
 from contextvars import ContextVar
-from typing import Any
 
 from app.utils.pii import mask_pii
 

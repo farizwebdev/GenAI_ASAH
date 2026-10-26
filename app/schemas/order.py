@@ -1,6 +1,7 @@
 """Skema Pydantic untuk ekstraksi draf pesanan sewa alat camping."""
 
 from typing import Any
+
 from pydantic import BaseModel, Field
 
 from app.schemas.common import ItemStatusEnum

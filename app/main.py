@@ -1,7 +1,7 @@
 """Aplikasi FastAPI Layanan Gen AI Asisten Chat Toko Sabana Adventure Jombor."""
 
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
 
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
@@ -32,11 +32,12 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 def create_app() -> FastAPI:
     """Factory function untuk membuat instance aplikasi FastAPI."""
-    settings = get_settings()
-
     app = FastAPI(
         title="Layanan Gen AI - Asisten Chat Toko",
-        description="Layanan AI untuk ekstraksi booking, RAG info toko, dan guardrails chat Sabana Adventure Jombor.",
+        description=(
+            "Layanan AI untuk ekstraksi booking, RAG info toko, "
+            "dan guardrails chat Sabana Adventure Jombor."
+        ),
         version="2.0.0",
         lifespan=lifespan,
     )

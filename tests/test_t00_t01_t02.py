@@ -1,20 +1,16 @@
 """Unit test untuk memvalidasi tugas T-00, T-01, dan T-02 sesuai PRD."""
 
 from pathlib import Path
+
 from fastapi.testclient import TestClient
 
 from app.core.config import get_settings
-from app.core.errors import (
-    AITimeoutError,
-    AppError,
-    InvalidInputError,
-    UnauthorizedError,
-)
+from app.core.errors import AITimeoutError
 from app.main import app
-from app.schemas.chat import ChatMeta, ChatRequest, ChatResponse
+from app.schemas.chat import ChatRequest, ChatResponse
 from app.schemas.common import ChannelEnum, IntentEnum, ItemStatusEnum, RouteEnum
 from app.schemas.errors import ErrorResponse
-from app.schemas.order import ExtractedOrder, OrderItem
+from app.schemas.order import ExtractedOrder
 from app.utils.pii import mask_pii
 
 client = TestClient(app)

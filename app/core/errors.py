@@ -1,6 +1,7 @@
 """Definisi error kustom dan penanganan exception terpusat sesuai PRD Bagian 8.4."""
 
 from typing import Any
+
 from fastapi import Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -121,7 +122,9 @@ class AIUnavailableError(AppError):
 
     def __init__(
         self,
-        message_user: str = "Layanan asisten AI sedang tidak dapat diakses. Silakan hubungi pegawai toko.",
+        message_user: str = (
+            "Layanan asisten AI sedang tidak dapat diakses. Silakan hubungi pegawai toko."
+        ),
         message_dev: str = "Layanan LLM atau vector store mati",
     ) -> None:
         super().__init__(

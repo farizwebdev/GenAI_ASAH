@@ -1,9 +1,9 @@
 """Tipe umum dan enum untuk layanan Gen AI Sabana Adventure Jombor."""
 
-from enum import Enum
+from enum import StrEnum
 
 
-class ChannelEnum(str, Enum):
+class ChannelEnum(StrEnum):
     """Titik masuk layanan chat."""
 
     web_widget = "web_widget"
@@ -11,7 +11,7 @@ class ChannelEnum(str, Enum):
     telegram = "telegram"
 
 
-class IntentEnum(str, Enum):
+class IntentEnum(StrEnum):
     """5 kelas maksud percakapan sesuai PRD Bagian 3."""
 
     booking_sewa = "booking_sewa"
@@ -21,7 +21,7 @@ class IntentEnum(str, Enum):
     lainnya = "lainnya"
 
 
-class RouteEnum(str, Enum):
+class RouteEnum(StrEnum):
     """Tujuan routing eksekusi aksi berdasarkan channel x intent."""
 
     open_catalog = "open_catalog"
@@ -32,7 +32,7 @@ class RouteEnum(str, Enum):
     suggest_reply = "suggest_reply"
 
 
-class ItemStatusEnum(str, Enum):
+class ItemStatusEnum(StrEnum):
     """Status pencocokan nama alat terhadap katalog toko."""
 
     matched = "matched"
