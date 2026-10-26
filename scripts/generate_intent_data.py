@@ -30,7 +30,10 @@ BOOKING_TEMPLATES = [
     ),
     # Format semi-lengkap
     (
-        "Kak mau booking:\nTanggal: {tanggal}\nJam: {jam}\nList: {items}\nNanti nambah barang di toko ya",
+        (
+            "Kak mau booking:\nTanggal: {tanggal}\nJam: {jam}\n"
+            "List: {items}\nNanti nambah barang di toko ya"
+        ),
         "template_semi_extra",
     ),
     (
@@ -235,7 +238,7 @@ def main() -> None:
     final_rows = []
     item_id_counter = 1
 
-    for lbl, groups in groups_by_label.items():
+    for _lbl, groups in groups_by_label.items():
         random.shuffle(groups)
         n_groups = len(groups)
         n_train = int(n_groups * 0.70)
@@ -243,7 +246,6 @@ def main() -> None:
 
         train_groups = set(groups[:n_train])
         val_groups = set(groups[n_train : n_train + n_val])
-        test_groups = set(groups[n_train + n_val :])
 
         for grp in groups:
             if grp in train_groups:

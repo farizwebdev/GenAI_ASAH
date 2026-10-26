@@ -66,12 +66,22 @@ def main() -> None:
             # Variasi typo
             typo_alias = inject_typo(alias)
             if typo_alias != alias:
-                pairs.append({"raw_text": typo_alias, "item_id": item_id, "qty_hint": "1", "spec_hint": kap})
+                pairs.append({
+                    "raw_text": typo_alias,
+                    "item_id": item_id,
+                    "qty_hint": "1",
+                    "spec_hint": kap,
+                })
 
             # Variasi tanpa spasi (contoh "sleepingbag")
             if " " in alias:
                 no_space = alias.replace(" ", "")
-                pairs.append({"raw_text": no_space, "item_id": item_id, "qty_hint": "1", "spec_hint": kap})
+                pairs.append({
+                    "raw_text": no_space,
+                    "item_id": item_id,
+                    "qty_hint": "1",
+                    "spec_hint": kap,
+                })
 
             # Variasi penambahan kuantitas (qty)
             for q in ["2", "3", "4"]:
