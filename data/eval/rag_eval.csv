@@ -1,0 +1,22 @@
+id,question,expected_kb_ids,must_contain,must_not_contain
+r01,sewa 3 hari dihitung berapa hari?,KB-03,2 hari,
+r02,perlu DP nggak kalau booking lewat WA?,KB-01,tidak wajib DP,
+r03,jaminannya apa aja?,KB-04,KTP,
+r04,buka jam berapa?,KB-07,08.00,
+r05,ready tenda tanggal 31 gak?,KB-09,katalog,stok tersedia
+r06,bisa nambah barang pas di toko?,KB-02,di toko,
+r07,denda telat berapa?,KB-06,pegawai,
+r08,gimana cara booking alat camping?,KB-01,format,
+r09,alamat tokonya di mana ya kak?,KB-08,Ringroad Utara,
+r10,toko sabana adventure tutup jam berapa?,KB-07,21.00,
+r11,kalau mau sewa bayarnya bisa pakai apa saja?,KB-05,QRIS,
+r12,apakah jaminan kartu BPJS atau KTM bisa?,KB-04,identitas fisik,
+r13,saya mau sewa jaket apakah perlu ukuran?,KB-10,ukuran,
+r14,kalau alatnya rusak dendanya gimana kak?,KB-06,biaya perbaikan,
+r15,bisa bayar transfer bank gak kak?,KB-05,transfer,
+r16,hari minggu tokonya tetap buka atau libur?,KB-07,setiap hari,
+r17,kalau saya mau batalin sewa caranya gimana?,KB-11,pegawai,
+r18,bisa sewa kompor lapangan sama nesting?,KB-12,kompor,
+r19,alat apa saja yang disewakan di sini kak?,KB-12,tenda,
+r20,sepatu hiking ready ukuran 42 gak kak?,KB-09,katalog,stok tersedia
+r21,kalau sewa 4 hari dihitung berapa hari sewa?,KB-03,2 hari,

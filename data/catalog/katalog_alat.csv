@@ -1,0 +1,26 @@
+item_id,nama,kategori,alias,butuh_ukuran,spec_kapasitas,tipe,harga_per_hari_contoh,stok_contoh,source
+TND-DOME-2,Tenda Dome Kapasitas 2,tenda,tenda kap 2|tenda 2 orang|dome 2|tenda dome 2|tenda 2p,false,2,sewa,25000,6,sintetis
+TND-DOME-4,Tenda Dome Kapasitas 4,tenda,tenda kap 4|tenda 4 orang|dome 4|tenda dome 4|tenda 4p,false,4,sewa,35000,6,sintetis
+TND-DOME-6,Tenda Dome Kapasitas 6,tenda,tenda kap 6|tenda 6 orang|dome 6|tenda dome 6|tenda 6p,false,6,sewa,50000,4,sintetis
+FLY-SHEET,Flysheet,tenda,flysheet|fly sheet|flyseat|fly seat|tarp|terpal,false,,sewa,10000,8,sintetis
+MTR-SPONS,Matras Spons,tidur,matras|matras spons|matras gulung|alas tidur,false,,sewa,5000,20,sintetis
+MTR-ANGIN,Matras Angin,tidur,matras angin|matras tiup,false,,sewa,12000,6,sintetis
+SLB-STD,Sleeping Bag Standar,tidur,sleeping bag|sleeping back|sb|kantong tidur,false,,sewa,10000,20,sintetis
+SLB-POLAR,Sleeping Bag Polar,tidur,sleeping bag polar|sb polar,false,,sewa,12000,10,sintetis
+HAM-STD,Hammock,tidur,hammock|hamock|hammock tali,false,,sewa,10000,5,sintetis
+CRR-40L,Carrier 40L,tas,carrier 40|carrier 40l|keril 40|tas gunung 40,false,,sewa,20000,5,sintetis
+CRR-60L,Carrier 60L,tas,carrier 60|carrier 60l|keril 60|ransel gunung 60|carrier,false,,sewa,25000,8,sintetis
+CRR-80L,Carrier 80L,tas,carrier 80|carrier 80l|keril 80,false,,sewa,30000,3,sintetis
+DYP-STD,Daypack,tas,daypack|day pack|tas kecil|ransel kecil,false,,sewa,10000,6,sintetis
+STV-PORT,Kompor Portable,masak,kompor|kompor portable|kompor portabel|kompor lapangan,false,,sewa,8000,10,sintetis
+NST-SET,Nesting (Cooking Set),masak,nesting|nesting set|cooking set|panci lapangan,false,,sewa,8000,10,sintetis
+GAS-KLG,Gas Kaleng (Isi Ulang),habis_pakai,gas|refil gas|refill gas|gas kaleng|tabung gas|isi gas,false,,habis_pakai,15000,30,sintetis
+HDL-STD,Headlamp,penerangan,headlamp|head lamp|senter kepala|hl|hedlamp,false,,sewa,8000,15,sintetis
+LNT-STD,Lampu Tenda (Lantern),penerangan,lampu tenda|lantern|lentera|lampu camping,false,,sewa,8000,8,sintetis
+SPT-HIK,Sepatu Hiking,alas_kaki,sepatu|sepatu gunung|sepatu hiking|boots,true,,sewa,20000,10,sintetis
+SPT-TRL,Sepatu Trail Run,alas_kaki,sepatu trail|sepatu trail run|trail run,true,,sewa,20000,6,sintetis
+JKT-GNG,Jaket Gunung,pakaian,jaket|jaket gunung|jaket outdoor|jaket polar,true,,sewa,15000,10,sintetis
+PNC-STD,Ponco (Jas Hujan),pakaian,ponco|jas hujan|raincoat,false,,sewa,5000,15,sintetis
+TRK-POL,Trekking Pole,aksesori,trekking pole|tongkat gunung|tongkat trekking|pole,false,,sewa,8000,10,sintetis
+KRS-LPT,Kursi Lipat,aksesori,kursi lipat|kursi camping|kursi,false,,sewa,8000,8,sintetis
+MJA-LPT,Meja Lipat,aksesori,meja lipat|meja camping|meja,false,,sewa,10000,5,sintetis
