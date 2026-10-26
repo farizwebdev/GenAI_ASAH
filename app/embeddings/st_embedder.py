@@ -27,10 +27,13 @@ class SentenceTransformerEmbedder(BaseEmbedder):
             return
 
         try:
-            from sentence_transformers import SentenceTransformer
+            import importlib
+
+            st_module = importlib.import_module("sentence_transformers")
+            sentence_transformer_cls = st_module.SentenceTransformer
 
             logger.info(f"Memuat model embedding lokal: {self.model_name}")
-            self._model = SentenceTransformer(self.model_name)
+            self._model = sentence_transformer_cls(self.model_name)
             dim = self._model.get_sentence_embedding_dimension()
             if dim:
                 self._dimension = int(dim)
