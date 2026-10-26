@@ -1,14 +1,14 @@
 """Implementasi Fake Embedder deterministik untuk pengujian tanpa jaringan."""
 
 import hashlib
-
-import numpy as np
+import math
+import random
 
 from app.embeddings.base import BaseEmbedder
 
 
 class FakeEmbedder(BaseEmbedder):
-    """Embedder deterministik tiruan: teks yang sama selalu menghasilkan vektor yang identik.
+    """Embedder deterministik tiruan murni Python (tanpa dependensi eksternal).
 
     Menggunakan hash SHA-256 dari teks sebagai seed generator angka acak dan
     dinormalisasi dengan L2-norm sehingga cocok untuk perhitungan cosine similarity.
@@ -28,17 +28,17 @@ class FakeEmbedder(BaseEmbedder):
 
         # Hasilkan integer seed stabil dari SHA-256 string
         hash_bytes = hashlib.sha256(text.strip().lower().encode("utf-8")).digest()
-        seed = int.from_bytes(hash_bytes[:8], byteorder="big") % (2**32)
+        seed = int.from_bytes(hash_bytes[:8], byteorder="big")
 
-        rng = np.random.RandomState(seed)
-        vec = rng.randn(self._dim).astype(np.float32)
+        rng = random.Random(seed)
+        vec = [rng.gauss(0.0, 1.0) for _ in range(self._dim)]
 
         # L2-normalization agar panjang vektor = 1.0 (unit vector)
-        norm = np.linalg.norm(vec)
+        norm = math.sqrt(sum(x * x for x in vec))
         if norm > 0:
-            vec = vec / norm
+            vec = [x / norm for x in vec]
 
-        return vec.tolist()
+        return vec
 
     def embed_batch(self, texts: list[str]) -> list[list[float]]:
         return [self.embed_text(t) for t in texts]
