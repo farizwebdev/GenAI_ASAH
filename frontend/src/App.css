@@ -8,8 +8,7 @@
   display: flex;
   flex-direction: column;
   background-color: #f4f5f7;
-  max-width: 100%;
-  overflow-x: clip;
+  width: 100%;
 }
 
 /* ---------------- 1. TOP ANNOUNCEMENT BAR ---------------- */
@@ -77,14 +76,18 @@
   color: #d4d4d8;
 }
 
-/* ---------------- 2. MAIN HEADER & NAVBAR ---------------- */
+/* ---------------- 2. MAIN HEADER & NAVBAR (STICKY ON SCROLL) ---------------- */
 .main-header {
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 50;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 900;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid var(--border);
+  transition: all 0.2s ease;
 }
 
 .header-inner {
