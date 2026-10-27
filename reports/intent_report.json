@@ -1,0 +1,85 @@
+{
+  "best_model": "E1",
+  "classes": [
+    "booking_sewa",
+    "keluhan",
+    "lainnya",
+    "tanya_info",
+    "ubah_batal"
+  ],
+  "comparison": {
+    "E1": {
+      "val_macro_f1": 1.0,
+      "test_macro_f1": 1.0,
+      "test_f1_per_class": {
+        "booking_sewa": 1.0,
+        "keluhan": 1.0,
+        "lainnya": 1.0,
+        "tanya_info": 1.0,
+        "ubah_batal": 1.0
+      },
+      "latency_ms_per_sample": 0.07
+    },
+    "E2": {
+      "val_macro_f1": 1.0,
+      "test_macro_f1": 1.0,
+      "test_f1_per_class": {
+        "booking_sewa": 1.0,
+        "keluhan": 1.0,
+        "lainnya": 1.0,
+        "tanya_info": 1.0,
+        "ubah_batal": 1.0
+      },
+      "latency_ms_per_sample": 0.265
+    },
+    "E3": {
+      "val_macro_f1": 0.8013,
+      "test_macro_f1": 0.8593,
+      "test_f1_per_class": {
+        "booking_sewa": 0.6667,
+        "keluhan": 1.0,
+        "lainnya": 0.9524,
+        "tanya_info": 0.8571,
+        "ubah_batal": 0.8205
+      },
+      "latency_ms_per_sample": 0.417
+    }
+  },
+  "confusion_matrix_best": [
+    [
+      17,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      23,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      20,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      17,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      19
+    ]
+  ]
+}

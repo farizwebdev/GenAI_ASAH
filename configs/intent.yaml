@@ -1,0 +1,15 @@
+# Konfigurasi Pelatihan Model Intent Klasifikasi (E1 - E3)
+seed: 42
+min_confidence: 0.5
+
+tfidf:
+  ngram_range: [1, 2]
+  max_features: 5000
+  sublinear_tf: true
+
+logistic_regression:
+  C: 1.0
+  max_iter: 1000
+
+linear_svc:
+  C: 1.0

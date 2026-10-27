@@ -1,10 +1,16 @@
-.PHONY: install test lint format run clean
+.PHONY: install test lint format run train validate-data clean
 
 install:
 	pip install -r requirements.txt
 
 test:
 	pytest -q
+
+train:
+	python -m app.training.train_intent
+
+validate-data:
+	python scripts/validate_data.py
 
 lint:
 	ruff check .
