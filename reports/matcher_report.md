@@ -14,9 +14,9 @@ khususnya pada split data uji (*test split*) dengan total **386 sampel**.
 
 | Metode | Accuracy@1 | Hit@3 | MRR | Latensi (ms/sampel) |
 |---|---|---|---|---|
-| **M1** (RapidFuzz) | 0.9948 | 1.0000 | 0.9974 | 0.635 ms |
-| **M2** (Embedding) | 0.3212 | 0.4326 | 0.3718 | 8.351 ms |
-| **M3** (Ensemble w=0.65) | **0.9922** | **1.0000** | **0.9961** | 8.219 ms |
+| **M1** (RapidFuzz) | 0.9948 | 1.0000 | 0.9974 | 0.645 ms |
+| **M2** (Embedding) | 0.3212 | 0.4326 | 0.3718 | 8.560 ms |
+| **M3** (Ensemble w=0.65) | **0.9922** | **1.0000** | **0.9961** | 8.483 ms |
 
 ## 3. Analisis dan Pilihan Model Final
 
