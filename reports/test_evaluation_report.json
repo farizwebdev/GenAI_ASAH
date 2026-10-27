@@ -1,0 +1,97 @@
+{
+  "model_name": "E1_tuned_augmented",
+  "n_test_samples": 96,
+  "macro_f1": 0.9889,
+  "weighted_f1": 0.9896,
+  "latency_ms_per_sample": 0.179,
+  "classification_report": {
+    "booking_sewa": {
+      "precision": 0.9444444444444444,
+      "recall": 1.0,
+      "f1-score": 0.9714285714285714,
+      "support": 17.0
+    },
+    "keluhan": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 23.0
+    },
+    "lainnya": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "tanya_info": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 17.0
+    },
+    "ubah_batal": {
+      "precision": 1.0,
+      "recall": 0.9473684210526315,
+      "f1-score": 0.972972972972973,
+      "support": 19.0
+    },
+    "accuracy": 0.9895833333333334,
+    "macro avg": {
+      "precision": 0.9888888888888889,
+      "recall": 0.9894736842105264,
+      "f1-score": 0.9888803088803089,
+      "support": 96.0
+    },
+    "weighted avg": {
+      "precision": 0.9901620370370371,
+      "recall": 0.9895833333333334,
+      "f1-score": 0.989591377091377,
+      "support": 96.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      17,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      23,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      20,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      17,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      18
+    ]
+  ],
+  "classes": [
+    "booking_sewa",
+    "keluhan",
+    "lainnya",
+    "tanya_info",
+    "ubah_batal"
+  ],
+  "evaluated_at": "2026-10-27T10:04:22Z"
+}
