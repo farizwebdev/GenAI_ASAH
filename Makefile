@@ -21,6 +21,9 @@ train-matcher:
 evaluate-extractor:
 	python -m app.training.evaluate_extractor
 
+evaluate-rag:
+	python -m app.training.evaluate_rag
+
 validate-data:
 	python scripts/validate_data.py
 
