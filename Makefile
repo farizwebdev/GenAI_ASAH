@@ -9,6 +9,12 @@ test:
 train:
 	python -m app.training.train_intent
 
+tune:
+	python -m app.training.augment_and_tune
+
+report:
+	python -m app.training.evaluate
+
 validate-data:
 	python scripts/validate_data.py
 
