@@ -315,14 +315,14 @@ export default function App() {
         <div className="top-bar-inner">
           <div className="top-bar-info">
             <span className="top-tag">SABANA PROMO</span>
-            <span>Aturan Sewa: Sewa 3 hari dihitung tarif 2 hari &bull; Ambil H-1 Sore Bebas Biaya Tambahan!</span>
+            <span className="top-bar-promo-text">Sewa 3 Hari Bayar 2 Hari &bull; Ambil H-1 Sore Bebas Biaya Tambahan!</span>
           </div>
           <div className="top-bar-links">
             <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer" className="top-link">
               <Phone size={13} /> CS WhatsApp: 0812-3456-7890
             </a>
             <span className="top-sep">|</span>
-            <span className="top-loc">Lokasi: Jombor, Sleman</span>
+            <span className="top-loc">Jombor, Sleman</span>
           </div>
         </div>
       </div>
