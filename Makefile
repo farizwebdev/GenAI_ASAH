@@ -51,6 +51,9 @@ docker-run:
 warmup:
 	python scripts/warmup.py
 
+build-readme:
+	python scripts/build_readme_tables.py
+
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type d -name ".pytest_cache" -exec rm -rf {} +
