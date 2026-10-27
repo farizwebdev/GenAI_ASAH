@@ -471,7 +471,7 @@ export default function App() {
       {/* 6. KATALOG PRODUK UTAMA (SHOPEE-INSPIRED CLEAN OUTDOOR CARDS) */}
       <main id="katalog-horizontal" className="catalog-section">
         <div className="catalog-container">
-          {/* Header Bar Katalog dengan Tombol Scroll Horizontal */}
+          {/* Header Bar Katalog */}
           <div className="catalog-header-bar">
             <div className="catalog-title-area">
               <div className="catalog-badge-pill">
@@ -479,53 +479,46 @@ export default function App() {
               </div>
               <h2 className="catalog-main-title">Rekomendasi Alat Camping Pilihan</h2>
               <p className="catalog-sub-title">
-                Geser ke kanan untuk melihat katalog &bull; <b>{filteredProducts.length}</b> alat outdoor tersedia
+                Geser ke kanan untuk melihat seluruh alat &bull; Tersedia <b>{filteredProducts.length}</b> peralatan
               </p>
-            </div>
-
-            {/* Tombol Kontrol Geser Horizontal */}
-            <div className="catalog-nav-controls">
-              <button 
-                onClick={() => scrollCatalog('left')}
-                className="catalog-scroll-btn"
-                title="Geser ke kiri"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button 
-                onClick={() => scrollCatalog('right')}
-                className="catalog-scroll-btn"
-                title="Geser ke kanan"
-              >
-                <ChevronRight size={20} />
-              </button>
             </div>
           </div>
 
-          {/* Container Scroll Horizontal Produk */}
-          {filteredProducts.length === 0 ? (
-            <div className="empty-catalog">
-              <p>Tidak ditemukan alat dengan kata kunci "<b>{searchQuery}</b>"</p>
-              <button onClick={() => { setSearchQuery(""); setSelectedCategory("semua"); }} className="reset-btn">
-                Tampilkan Semua Alat
-              </button>
-            </div>
-          ) : (
-            <div className="products-horizontal-slider" ref={catalogScrollRef}>
-              {filteredProducts.map((item) => (
-                <div key={item.id} className="shopee-card">
-                  {/* Gambar / Visual Mockup Produk */}
-                  <div className="shopee-card-media">
-                    <div className="shopee-top-badges">
-                      <span className="shopee-badge-mall">{item.badge}</span>
-                      <span className="shopee-badge-loc">{item.location}</span>
-                    </div>
+          {/* Wrapper Slider Horizontal dengan Tombol Melayang Samping */}
+          <div className="catalog-slider-wrapper">
+            <button 
+              onClick={() => scrollCatalog('left')}
+              className="catalog-floating-arrow arrow-left"
+              aria-label="Geser ke kiri"
+              title="Geser ke kiri"
+            >
+              <ChevronLeft size={22} />
+            </button>
 
-                    <div className="shopee-product-preview">
-                      <Tent size={52} className="shopee-preview-icon" />
-                      <span className="shopee-cat-tag">{item.category.toUpperCase()}</span>
+            {filteredProducts.length === 0 ? (
+              <div className="empty-catalog">
+                <p>Tidak ditemukan alat dengan kata kunci "<b>{searchQuery}</b>"</p>
+                <button onClick={() => { setSearchQuery(""); setSelectedCategory("semua"); }} className="reset-btn">
+                  Tampilkan Semua Alat
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="products-horizontal-slider" ref={catalogScrollRef}>
+                {filteredProducts.map((item) => (
+                  <div key={item.id} className="shopee-card">
+                    {/* Gambar / Visual Mockup Produk */}
+                    <div className="shopee-card-media">
+                      <div className="shopee-top-badges">
+                        <span className="shopee-badge-mall">{item.badge}</span>
+                        <span className="shopee-badge-loc">{item.location}</span>
+                      </div>
+
+                      <div className="shopee-product-preview">
+                        <Tent size={52} className="shopee-preview-icon" />
+                        <span className="shopee-cat-tag">{item.category.toUpperCase()}</span>
+                      </div>
                     </div>
-                  </div>
 
                   {/* Body Kartu Produk */}
                   <div className="shopee-card-content">
@@ -574,9 +567,20 @@ export default function App() {
                 </div>
               ))}
             </div>
+
+              <button 
+                onClick={() => scrollCatalog('right')}
+                className="catalog-floating-arrow arrow-right"
+                aria-label="Geser ke kanan"
+                title="Geser ke kanan"
+              >
+                <ChevronRight size={22} />
+              </button>
+            </>
           )}
         </div>
-      </main>
+      </div>
+    </main>
 
       {/* 7. MODAL DRAWER KERANJANG PRODUK (POPUP CART MODAL) */}
       {isCartOpen && (

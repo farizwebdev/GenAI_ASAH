@@ -8,6 +8,8 @@
   display: flex;
   flex-direction: column;
   background-color: #f4f5f7;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 /* ---------------- 1. TOP ANNOUNCEMENT BAR ---------------- */
@@ -526,15 +528,11 @@
   max-width: 1320px;
   margin: 2.25rem auto 4rem;
   padding: 0 1.25rem;
+  box-sizing: border-box;
 }
 
 .catalog-header-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   margin-bottom: 1.25rem;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .catalog-badge-pill {
@@ -565,16 +563,19 @@
   margin-top: 0.25rem;
 }
 
-/* Navigasi Tombol Geser Horizontal */
-.catalog-nav-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+/* Wrapper Slider dengan Posisi Tombol Melayang Relatif Presisi */
+.catalog-slider-wrapper {
+  position: relative;
+  width: 100%;
 }
 
-.catalog-scroll-btn {
-  width: 2.5rem;
-  height: 2.5rem;
+/* Tombol Panah Geser Melayang di Samping Slider */
+.catalog-floating-arrow {
+  position: absolute;
+  top: 42%;
+  transform: translateY(-50%);
+  width: 2.85rem;
+  height: 2.85rem;
   border-radius: 9999px;
   background-color: #ffffff;
   border: 2px solid var(--secondary);
@@ -583,14 +584,23 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 2px 2px 0px var(--secondary);
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.catalog-scroll-btn:hover {
+.catalog-floating-arrow:hover {
   background-color: var(--primary);
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px var(--secondary);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.catalog-floating-arrow.arrow-left {
+  left: 0.25rem;
+}
+
+.catalog-floating-arrow.arrow-right {
+  right: 0.25rem;
 }
 
 /* Container Horizontal Slider */
@@ -602,10 +612,12 @@
   padding: 0.5rem 0.25rem 1.25rem;
   scrollbar-width: thin;
   scrollbar-color: var(--primary) transparent;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 .products-horizontal-slider::-webkit-scrollbar {
-  height: 8px;
+  height: 7px;
 }
 
 .products-horizontal-slider::-webkit-scrollbar-track {
@@ -1286,6 +1298,13 @@
   }
   .arrow-prev, .arrow-next {
     display: none;
+  }
+  .catalog-floating-arrow {
+    display: none;
+  }
+  .products-horizontal-slider {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
   .shopee-card {
     min-width: 180px;
