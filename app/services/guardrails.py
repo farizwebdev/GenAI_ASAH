@@ -176,9 +176,17 @@ class GuardrailsService:
         return False, None
 
     def is_greeting(self, text: str) -> bool:
-        """Memeriksa apakah teks merupakan sapaan umum."""
-        cleaned = text.strip().strip(".!?,")
-        return bool(GREETING_PATTERN.match(cleaned))
+        """Memeriksa apakah teks merupakan sapaan umum (termasuk sapaan majemuk)."""
+        cleaned = re.sub(r"[^\w\s]", " ", text.lower()).strip()
+        tokens = cleaned.split()
+        if not tokens:
+            return False
+        greeting_words = {
+            "halo", "hai", "hei", "helo", "assalamualaikum", "assalam", "walaikumsalam",
+            "selamat", "pagi", "siang", "sore", "malam", "permisi", "kak", "min", "admin",
+            "tes", "test", "ping",
+        }
+        return all(w in greeting_words for w in tokens)
 
     def is_thanks(self, text: str) -> bool:
         """Memeriksa apakah teks merupakan ucapan terima kasih."""
