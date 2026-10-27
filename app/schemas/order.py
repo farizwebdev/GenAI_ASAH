@@ -87,3 +87,33 @@ class ExtractedOrder(BaseModel):
         default=True,
         description="Wajib True bila butuh pemeriksaan manual pegawai sebelum disimpan",
     )
+
+
+class ExtractOrderRequest(BaseModel):
+    """Format permintaan untuk endpoint POST /orders/extract."""
+
+    message: str = Field(
+        ...,
+        min_length=1,
+        max_length=1000,
+        description="Isi pesan WhatsApp booking dari pelanggan",
+    )
+    reference_date: str | None = Field(
+        default=None,
+        description="Tanggal acuan (YYYY-MM-DD) untuk resolusi tanggal relatif",
+    )
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "message": (
+                    "Nama: Rizky Pratama\n"
+                    "Tanggal ambil: 31 Oktober 2026\n"
+                    "Jam: 09.00-11.00\n"
+                    "List: tenda dome kap 4, matras 2"
+                ),
+                "reference_date": "2026-10-28",
+            }
+        }
+    }
+

@@ -69,6 +69,19 @@ class ChatRequest(BaseModel):
         description="Jika true, langsung lakukan ekstraksi pesanan tanpa memandang intent",
     )
 
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "request_id": "req-12345",
+                "session_id": "sess-user-01",
+                "channel": "web_widget",
+                "message": "sewa 3 hari dihitung berapa hari kak?",
+                "reference_date": "2026-10-28",
+                "force_extract": False,
+            }
+        }
+    }
+
 
 class ChatResponse(BaseModel):
     """Format standar respon layanan Gen AI untuk POST /chat/message."""
@@ -98,6 +111,14 @@ class ClassifyRequest(BaseModel):
 
     message: str = Field(..., min_length=1, max_length=1000)
 
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "message": "bisa sewa tenda dome 4 orang untuk besok?",
+            }
+        }
+    }
+
 
 class ClassifyResponse(BaseModel):
     """Format respon untuk endpoint POST /chat/classify."""
@@ -111,6 +132,14 @@ class AskRequest(BaseModel):
     """Format permintaan untuk endpoint POST /chat/ask."""
 
     question: str = Field(..., min_length=1, max_length=1000)
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "question": "jaminan sewa alat camping apa saja kak?",
+            }
+        }
+    }
 
 
 class AskResponse(BaseModel):
