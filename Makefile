@@ -18,6 +18,9 @@ report:
 train-matcher:
 	python -m app.training.train_matcher
 
+evaluate-extractor:
+	python -m app.training.evaluate_extractor
+
 validate-data:
 	python scripts/validate_data.py
 

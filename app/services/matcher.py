@@ -61,8 +61,9 @@ class CatalogItem:
         self.nama = nama
         self.kategori = kategori
         self.raw_aliases = [a.strip() for a in alias_str.split("|") if a.strip()]
+        id_aliases = [item_id.lower(), item_id.lower().replace("-", " ")]
         self.clean_aliases = [
-            normalize(a, mode="for_intent") for a in self.raw_aliases
+            normalize(a, mode="for_intent") for a in (self.raw_aliases + id_aliases)
         ]
         self.clean_nama = normalize(nama, mode="for_intent")
         self.butuh_ukuran = butuh_ukuran
