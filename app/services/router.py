@@ -32,6 +32,7 @@ from app.services.guardrails import (
 )
 from app.services.intent import IntentClassifier, get_intent_classifier
 from app.services.rag import RAGService, get_rag_service
+from app.services.sentiment import SentimentClassifier, get_sentiment_classifier
 
 logger = get_logger(__name__)
 
@@ -67,11 +68,13 @@ class RouterService:
         guardrails: GuardrailsService | None = None,
         rag_service: RAGService | None = None,
         extractor: OrderExtractor | None = None,
+        sentiment_classifier: SentimentClassifier | None = None,
     ) -> None:
         self._classifier = classifier
         self._guardrails = guardrails
         self._rag = rag_service
         self._extractor = extractor
+        self._sentiment = sentiment_classifier
 
     @property
     def classifier(self) -> IntentClassifier:
@@ -100,6 +103,13 @@ class RouterService:
         if self._extractor is None:
             self._extractor = get_order_extractor()
         return self._extractor
+
+    @property
+    def sentiment(self) -> SentimentClassifier:
+        """Mengambil instance SentimentClassifier secara lazy."""
+        if self._sentiment is None:
+            self._sentiment = get_sentiment_classifier()
+        return self._sentiment
 
     def route_message(self, request: ChatRequest) -> ChatResponse:
         """Mengeksekusi perutean pesan lengkap dan mengembalikan ChatResponse standar.
@@ -221,6 +231,7 @@ class RouterService:
         prompt_version: str | None = None
         fallback_used = False
 
+        sentiment_label: str | None = None
         if intent == IntentEnum.booking_sewa:
             # PRD 6.9: Arahkan memilih alat di katalog dan keranjang. action={"type":"open_catalog"}
             route = RouteEnum.open_catalog
@@ -246,6 +257,7 @@ class RouterService:
             # PRD 6.9: route=handoff_staff (+ sentimen P2)
             route = RouteEnum.handoff_staff
             reply_text = KELUHAN_REPLY
+            sentiment_label, _ = self.sentiment.predict(message)
 
         else:
             # intent == IntentEnum.lainnya
@@ -274,7 +286,7 @@ class RouterService:
                 latency_ms=latency_ms,
                 fallback_used=fallback_used,
                 low_confidence=is_low_conf,
-                sentiment=None,
+                sentiment=sentiment_label,
             ),
         )
 
@@ -296,6 +308,7 @@ class RouterService:
         result: ExtractedOrder | None = None
         sources: list[str] = []
         prompt_version: str | None = None
+        sentiment_label: str | None = None
 
         fallback_used = False
         if intent == IntentEnum.booking_sewa:
@@ -322,6 +335,8 @@ class RouterService:
             # PRD 6.9: intent selain booking_sewa dan tanya_info
             # Kembalikan intent saja dengan catatan 'bukan pesan booking'
             route = RouteEnum.handoff_staff
+            if intent == IntentEnum.keluhan:
+                sentiment_label, _ = self.sentiment.predict(message)
             reply_text = (
                 f"Pesan ini terdeteksi sebagai maksud '{intent.value}' (bukan pesan booking). "
                 "Silakan tangani secara langsung sesuai keperluan pelanggan."
@@ -343,7 +358,7 @@ class RouterService:
                 latency_ms=latency_ms,
                 fallback_used=fallback_used,
                 low_confidence=is_low_conf,
-                sentiment=None,
+                sentiment=sentiment_label,
             ),
         )
 

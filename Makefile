@@ -27,6 +27,9 @@ evaluate-rag:
 evaluate-guardrails:
 	python -m app.training.evaluate_guardrails
 
+train-sentiment:
+	python -m app.training.train_sentiment
+
 validate-data:
 	python scripts/validate_data.py
 
