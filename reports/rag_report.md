@@ -14,8 +14,8 @@ Evaluasi dilakukan pada `data/eval/rag_eval.csv` (21 pertanyaan).
 ## 2. Kepatuhan Aturan Bisnis Khusus (Business Rules)
 
 1. **Larangan Kepastian Stok / Tanggal:** Pertanyaan ketersediaan tanggal/stok (r05, r20) berhasil diarahkan ke katalog website atau pegawai toko tanpa mengklaim 'stok tersedia'.
-2. **Penanganan Potongan Belum Lengkap `[ISI ...]`: ** Pertanyaan detail denda atau jaminan luar Jogja diarahkan untuk dikonfirmasi ke pegawai toko tanpa mengarang angka palsu.
-3. **Gaya Bahasa Pegawai Toko:** Semua balasan diawali sapaan ramah 'Kak' dengan nada sopan.
+2. **Penanganan Potongan Belum Lengkap `[ISI ...]`: ** Pertanyaan detail denda atau jaminan luar Jogja diarahkan untuk dikonfirmasi ke pegawai tanpa mengarang angka.
+3. **Gaya Bahasa Pegawai Toko:** Semua balasan diawali sapaan ramah 'Kak' dengan sopan.
 4. **Penyaringan Ambang Skor Rendah (`RAG_MIN_SCORE`):** Pertanyaan yang tidak relevan (skor < 0.35) langsung dialihkan ke pegawai tanpa membuang token LLM.
 
 ## 3. Rincian Hasil Pengujian per Pertanyaan
