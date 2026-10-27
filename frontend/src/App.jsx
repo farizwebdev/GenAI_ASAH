@@ -3,16 +3,18 @@ import {
   Tent, Compass, Search, ShoppingBag, Heart, User, Phone, 
   MessageSquare, ChevronLeft, ChevronRight, Star, Flame, 
   ShieldCheck, Clock, CheckCircle2, Tag, Filter, Sparkles,
-  ArrowRight, Shield, Zap, ThumbsUp, PackageCheck
+  ArrowRight, Shield, Zap, ThumbsUp, PackageCheck, X, Trash2,
+  Plus, Minus, ShoppingCart, Send
 } from 'lucide-react';
 import ChatWidget from './components/ChatWidget';
 import './App.css';
 
 export default function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("semua");
-  const [cartCount, setCartCount] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
   const catalogScrollRef = useRef(null);
 
@@ -67,139 +69,163 @@ export default function App() {
     { id: "aksesori", label: "Kursi & Alat Camp" }
   ];
 
-  // Data Katalog Produk Sabana Adventure
+  // Data Katalog Produk Sabana Adventure (Shopee/Tokopedia outdoor style)
   const catalogProducts = [
     {
       id: "TND-DOME-4",
-      name: "Tenda Dome Kapasitas 4P",
+      name: "Tenda Dome Kapasitas 4 Orang Waterproof Double Layer",
       category: "tenda",
       price: 35000,
+      originalPrice: 45000,
       rating: 4.9,
-      rentCount: 284,
-      desc: "Double layer waterproof, pasak & frame kokoh, ventilasi atas anti-kondensasi.",
-      badge: "Paling Laris",
-      stock: 6
+      soldCount: 482,
+      location: "Sleman, DIY",
+      badge: "Star+",
+      stock: 6,
+      tags: ["Double Layer", "Alas Terpal", "Frame Fiber"]
     },
     {
       id: "TND-DOME-2",
-      name: "Tenda Dome Kapasitas 2P",
+      name: "Tenda Dome Kapasitas 2 Orang Ultralight Praktis",
       category: "tenda",
       price: 25000,
+      originalPrice: 30000,
       rating: 4.8,
-      rentCount: 156,
-      desc: "Ringan dan praktis untuk solo trip atau berdua, pasak baja ringan.",
-      badge: "Best Value",
-      stock: 6
+      soldCount: 230,
+      location: "Sleman, DIY",
+      badge: "Diskon 17%",
+      stock: 6,
+      tags: ["Solo Camp", "Waterproof 2000mm"]
     },
     {
       id: "TND-DOME-6",
-      name: "Tenda Dome Kapasitas 6P",
+      name: "Tenda Dome Kapasitas 6 Orang Family Camping Besar",
       category: "tenda",
       price: 50000,
+      originalPrice: 65000,
       rating: 4.9,
-      rentCount: 98,
-      desc: "Keluarga/rombongan, ruang vestibule luas untuk taruh barang dan masak.",
+      soldCount: 114,
+      location: "Sleman, DIY",
       badge: "Keluarga",
-      stock: 4
+      stock: 4,
+      tags: ["Vestibule Luas", "Ventilasi Anti Pengap"]
     },
     {
       id: "CRR-60L",
-      name: "Carrier Consina 60L",
+      name: "Carrier Consina 60L Ergonomic Backsystem + Raincover",
       category: "tas",
       price: 25000,
+      originalPrice: 35000,
       rating: 4.9,
-      rentCount: 210,
-      desc: "Ergonomic backsystem busa tebal, sirkulasi udara punggung, include raincover.",
-      badge: "Favorit",
-      stock: 8
+      soldCount: 395,
+      location: "Sleman, DIY",
+      badge: "Star+",
+      stock: 8,
+      tags: ["Free Raincover", "Busa Tebal"]
     },
     {
       id: "CRR-80L",
-      name: "Carrier Ekspedisi 80L",
+      name: "Tas Carrier Ekspedisi 80L Heavy Duty Pendakian Jauh",
       category: "tas",
       price: 30000,
+      originalPrice: 40000,
       rating: 4.8,
-      rentCount: 65,
-      desc: "Kapasitas raksasa untuk pendakian panjang (Semeru, Rinjani), frame ganda.",
+      soldCount: 88,
+      location: "Sleman, DIY",
       badge: "Ekspedisi",
-      stock: 3
+      stock: 3,
+      tags: ["Double Frame Baja", "Torso Adjustable"]
     },
     {
       id: "SLB-POLAR",
-      name: "Sleeping Bag Polar Tebal",
+      name: "Sleeping Bag Bulu Polar Tebal Anti Dingin Suhu 10°C",
       category: "tidur",
       price: 12000,
+      originalPrice: 15000,
       rating: 4.9,
-      rentCount: 340,
-      desc: "Lapisan polar tebal, suhu kenyamanan 8-15°C, wangi dan bersih dicuci tiap sewa.",
-      badge: "Wajib Bawa",
-      stock: 10
+      soldCount: 650,
+      location: "Sleman, DIY",
+      badge: "Terlaris",
+      stock: 10,
+      tags: ["Wangi & Bersih", "Hangat Merbabu"]
     },
     {
       id: "MTR-SPONS",
-      name: "Matras Spons Tebal Gulung",
+      name: "Matras Spons Tebal Gulung Alas Tidur Tenda Camping",
       category: "tidur",
       price: 5000,
+      originalPrice: 7000,
       rating: 4.7,
-      rentCount: 420,
-      desc: "Alas tidur anti-dingin tanah, tidak mudah robek, tali pengikat praktis.",
-      badge: "Ekonomis",
-      stock: 20
+      soldCount: 812,
+      location: "Sleman, DIY",
+      badge: "Termurah",
+      stock: 20,
+      tags: ["Tebal 4mm", "Anti Lembap"]
     },
     {
       id: "STV-PORT",
-      name: "Kompor Portable Windproof",
+      name: "Kompor Portable Camping Windproof Model Bunga Anti Angin",
       category: "masak",
       price: 8000,
+      originalPrice: 12000,
       rating: 4.9,
-      rentCount: 310,
-      desc: "Bisa dilipat compact, penahan angin tipe bunga, pemantik elektrik otomatis.",
-      badge: "Praktis",
-      stock: 10
+      soldCount: 520,
+      location: "Sleman, DIY",
+      badge: "Star+",
+      stock: 10,
+      tags: ["Pemantik Otomatis", "Lipat Kompak"]
     },
     {
       id: "NST-SET",
-      name: "Cooking Set Nesting DS-308",
+      name: "Cooking Set Nesting DS-308 Panci Wajan Teflon Camping",
       category: "masak",
       price: 8000,
+      originalPrice: 12000,
       rating: 4.8,
-      rentCount: 275,
-      desc: "Panci ganda + wajan aluminium tebal teflon, mangkok kecil & spons cuci.",
+      soldCount: 410,
+      location: "Sleman, DIY",
       badge: "Lengkap",
-      stock: 10
+      stock: 10,
+      tags: ["Anti Lengket", "Include Spons Cuci"]
     },
     {
       id: "HDL-STD",
-      name: "Headlamp LED Cree 300 Lumens",
+      name: "Headlamp LED Cree 300 Lumens Senter Kepala Outdoor",
       category: "penerangan",
       price: 8000,
+      originalPrice: 10000,
       rating: 4.9,
-      rentCount: 190,
-      desc: "Mode terang, redup, & SOS merah. Tali elastis nyaman, baterai tahan 10 jam.",
+      soldCount: 290,
+      location: "Sleman, DIY",
       badge: "Safety",
-      stock: 15
+      stock: 15,
+      tags: ["3 Mode Lampu", "Tali Elastis"]
     },
     {
       id: "SPT-HIK",
-      name: "Sepatu Gunung Trekking",
+      name: "Sepatu Gunung Hiking Trekking Grip Vibram Anti Slip",
       category: "alas_kaki",
       price: 20000,
+      originalPrice: 28000,
       rating: 4.8,
-      rentCount: 140,
-      desc: "Outsole vibram anti-slip licin tanah basah, ankle support pelindung mata kaki.",
+      soldCount: 175,
+      location: "Sleman, DIY",
       badge: "Safety",
-      stock: 10
+      stock: 10,
+      tags: ["Ankle Support", "Water Resistant"]
     },
     {
       id: "KRS-LPT",
-      name: "Kursi Lipat Camping Portabel",
+      name: "Kursi Lipat Camping Portabel Rangka Besi Kuat Beban 100kg",
       category: "aksesori",
       price: 8000,
+      originalPrice: 12000,
       rating: 4.9,
-      rentCount: 220,
-      desc: "Rangka pipa besi kuat beban 100kg, bahan oxford tebal, kantong cangkir.",
+      soldCount: 360,
+      location: "Sleman, DIY",
       badge: "Santai",
-      stock: 8
+      stock: 8,
+      tags: ["Ada Cup Holder", "Ringan Dibawa"]
     }
   ];
 
@@ -207,13 +233,38 @@ export default function App() {
   const filteredProducts = catalogProducts.filter((product) => {
     const matchCategory = selectedCategory === "semua" || product.category === selectedCategory;
     const matchSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                        product.desc.toLowerCase().includes(searchQuery.toLowerCase());
+                        product.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchCategory && matchSearch;
   });
 
-  const handleAddToCart = () => {
-    setCartCount(prev => prev + 1);
+  // Manajemen Keranjang Sewa
+  const handleAddToCart = (product) => {
+    setCartItems(prev => {
+      const existing = prev.find(item => item.id === product.id);
+      if (existing) {
+        return prev.map(item => item.id === product.id ? { ...item, qty: item.qty + 1 } : item);
+      }
+      return [...prev, { ...product, qty: 1 }];
+    });
+    setIsCartOpen(true);
   };
+
+  const updateCartQty = (id, delta) => {
+    setCartItems(prev => prev.map(item => {
+      if (item.id === id) {
+        const newQty = item.qty + delta;
+        return newQty > 0 ? { ...item, qty: newQty } : null;
+      }
+      return item;
+    }).filter(Boolean));
+  };
+
+  const removeCartItem = (id) => {
+    setCartItems(prev => prev.filter(item => item.id !== id));
+  };
+
+  const totalCartCount = cartItems.reduce((acc, curr) => acc + curr.qty, 0);
+  const totalCartPrice = cartItems.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
 
   const formatRupiah = (num) => {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
@@ -249,7 +300,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* 2. E-COMMERCE MAIN NAVBAR */}
+      {/* 2. E-COMMERCE MAIN NAVBAR (HANYA TOMBOL KERANJANG, TANPA TOMBOL TANYA AI) */}
       <header className="main-header">
         <div className="header-inner">
           {/* Logo Brand */}
@@ -279,21 +330,21 @@ export default function App() {
             </div>
           </div>
 
-          {/* User & Cart Actions */}
+          {/* User & Cart Actions (Hanya Keranjang Produk) */}
           <div className="header-actions">
-            <button
-              onClick={() => setIsChatOpen(true)}
-              className="ai-chat-nav-btn"
-              title="Konsultasi Alat & Cek Sewa dengan AI"
+            <div 
+              className="cart-action-btn" 
+              onClick={() => setIsCartOpen(true)} 
+              title="Buka Keranjang Sewa"
             >
-              <MessageSquare size={17} />
-              <span className="btn-label">Tanya AI</span>
-            </button>
-
-            <div className="cart-action-btn" onClick={() => setIsChatOpen(true)} title="Daftar Alat Disewa">
-              <ShoppingBag size={20} />
-              {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-              <span className="btn-label-cart">Keranjang</span>
+              <div className="cart-icon-wrapper">
+                <ShoppingCart size={22} />
+                {totalCartCount > 0 && <span className="cart-badge">{totalCartCount}</span>}
+              </div>
+              <div className="cart-text-group">
+                <span className="btn-label-cart">Keranjang</span>
+                <span className="cart-total-preview">{formatRupiah(totalCartPrice)}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -339,13 +390,6 @@ export default function App() {
                     <a href="#katalog-horizontal" className="slide-cta-btn">
                       {banner.cta}
                     </a>
-                    <button 
-                      onClick={() => setIsChatOpen(true)}
-                      className="slide-ai-btn"
-                    >
-                      <MessageSquare size={16} />
-                      Tanya Asisten Toko
-                    </button>
                   </div>
                 </div>
               </div>
@@ -381,7 +425,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5. BRANDING & VALUE STRIP (REDESIGNED: MINIMALIS, MODERN, HIGH-CONTRAST) */}
+      {/* 5. BRANDING & VALUE STRIP (MINIMALIS & RAMPING) */}
       <section className="trust-strip-modern">
         <div className="trust-strip-container">
           <div className="trust-item">
@@ -424,18 +468,18 @@ export default function App() {
         </div>
       </section>
 
-      {/* 6. KATALOG PRODUK UTAMA (LAYOUT HORIZONTAL SLIDER CAROUSEL) */}
+      {/* 6. KATALOG PRODUK UTAMA (SHOPEE-INSPIRED CLEAN OUTDOOR CARDS) */}
       <main id="katalog-horizontal" className="catalog-section">
         <div className="catalog-container">
           {/* Header Bar Katalog dengan Tombol Scroll Horizontal */}
           <div className="catalog-header-bar">
             <div className="catalog-title-area">
               <div className="catalog-badge-pill">
-                <Flame size={14} /> KATALOG SEWA PILIHAN
+                <Flame size={14} /> KATALOG SEWA SABANA
               </div>
-              <h2 className="catalog-main-title">Peralatan Camping & Pendakian Siap Sewa</h2>
+              <h2 className="catalog-main-title">Rekomendasi Alat Camping Pilihan</h2>
               <p className="catalog-sub-title">
-                Geser ke samping untuk melihat seluruh alat &bull; Menampilkan <b>{filteredProducts.length}</b> peralatan
+                Geser ke kanan untuk melihat katalog &bull; <b>{filteredProducts.length}</b> alat outdoor tersedia
               </p>
             </div>
 
@@ -469,51 +513,63 @@ export default function App() {
           ) : (
             <div className="products-horizontal-slider" ref={catalogScrollRef}>
               {filteredProducts.map((item) => (
-                <div key={item.id} className="product-card-horizontal">
-                  {/* Badge Atas */}
-                  <div className="card-top-row">
-                    <span className="badge-tag">{item.badge}</span>
-                    <span className="stock-info">Stok: {item.stock}</span>
+                <div key={item.id} className="shopee-card">
+                  {/* Gambar / Visual Mockup Produk */}
+                  <div className="shopee-card-media">
+                    <div className="shopee-top-badges">
+                      <span className="shopee-badge-mall">{item.badge}</span>
+                      <span className="shopee-badge-loc">{item.location}</span>
+                    </div>
+
+                    <div className="shopee-product-preview">
+                      <Tent size={52} className="shopee-preview-icon" />
+                      <span className="shopee-cat-tag">{item.category.toUpperCase()}</span>
+                    </div>
                   </div>
 
-                  {/* Thumbnail / Ilustrasi Visual Produk */}
-                  <div className="card-thumbnail">
-                    <Tent size={42} className="thumb-icon" />
-                    <span className="thumb-cat">{item.category.toUpperCase()}</span>
-                  </div>
+                  {/* Body Kartu Produk */}
+                  <div className="shopee-card-content">
+                    {/* Judul Produk */}
+                    <h3 className="shopee-title" title={item.name}>
+                      {item.name}
+                    </h3>
 
-                  {/* Detail Info Produk */}
-                  <div className="card-body">
-                    <div className="card-rating">
-                      <Star size={13} className="star-filled" />
-                      <span>{item.rating}</span>
-                      <span className="rent-count">&bull; {item.rentCount}x disewa</span>
+                    {/* Tag Fitur Singkat */}
+                    <div className="shopee-tags-row">
+                      {item.tags.slice(0, 2).map((tag, idx) => (
+                        <span key={idx} className="shopee-mini-tag">{tag}</span>
+                      ))}
                     </div>
 
-                    <h3 className="product-title">{item.name}</h3>
-                    <p className="product-desc">{item.desc}</p>
-
-                    <div className="card-price-row">
-                      <span className="price-prefix">Tarif Sewa:</span>
-                      <div className="price-value">{formatRupiah(item.price)} <span className="price-unit">/ hari</span></div>
+                    {/* Harga Coret & Harga Sewa */}
+                    <div className="shopee-price-container">
+                      <div className="shopee-strike-row">
+                        <span className="shopee-original-price">{formatRupiah(item.originalPrice)}</span>
+                        <span className="shopee-disc-badge">HEMAT</span>
+                      </div>
+                      <div className="shopee-price-main">
+                        <span className="shopee-currency">Rp</span>
+                        <span className="shopee-amount">{(item.price).toLocaleString('id-ID')}</span>
+                        <span className="shopee-per-day">/hari</span>
+                      </div>
                     </div>
 
-                    {/* Tombol Sewa & Tanya AI */}
-                    <div className="card-btn-group">
-                      <button 
-                        onClick={() => handleAddToCart(item.name)}
-                        className="btn-rent"
-                      >
-                        + Sewa
-                      </button>
-                      <button 
-                        onClick={() => setIsChatOpen(true)}
-                        className="btn-ask-ai"
-                        title="Tanya ketersediaan atau spek alat ini ke AI"
-                      >
-                        <MessageSquare size={15} />
-                      </button>
+                    {/* Rating Bintang & Terjual / Tersewa */}
+                    <div className="shopee-metrics-row">
+                      <div className="shopee-rating">
+                        <Star size={12} className="star-shopee" />
+                        <span>{item.rating}</span>
+                      </div>
+                      <span className="shopee-sold">{item.soldCount} Tersewa</span>
                     </div>
+
+                    {/* Tombol Sewa Cepat */}
+                    <button 
+                      onClick={() => handleAddToCart(item)}
+                      className="shopee-btn-rent"
+                    >
+                      + Sewa Sekarang
+                    </button>
                   </div>
                 </div>
               ))}
@@ -522,7 +578,110 @@ export default function App() {
         </div>
       </main>
 
-      {/* 7. FOOTER E-COMMERCE */}
+      {/* 7. MODAL DRAWER KERANJANG PRODUK (POPUP CART MODAL) */}
+      {isCartOpen && (
+        <div className="cart-drawer-overlay" onClick={() => setIsCartOpen(false)}>
+          <div className="cart-drawer" onClick={(e) => e.stopPropagation()}>
+            {/* Header Keranjang */}
+            <div className="cart-drawer-header">
+              <div className="cart-header-title">
+                <ShoppingCart size={20} className="text-primary" />
+                <h3>Keranjang Sewa Alat ({totalCartCount})</h3>
+              </div>
+              <button 
+                onClick={() => setIsCartOpen(false)}
+                className="cart-close-btn"
+                title="Tutup Keranjang"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Isi Keranjang */}
+            <div className="cart-drawer-body">
+              {cartItems.length === 0 ? (
+                <div className="cart-empty-state">
+                  <ShoppingBag size={48} className="cart-empty-icon" />
+                  <h4>Keranjang Masih Kosong</h4>
+                  <p>Yuk pilih peralatan camping impianmu dari katalog Sabana!</p>
+                  <button onClick={() => setIsCartOpen(false)} className="cart-browse-btn">
+                    Mulai Pilih Alat
+                  </button>
+                </div>
+              ) : (
+                <div className="cart-items-list">
+                  {cartItems.map((item) => (
+                    <div key={item.id} className="cart-item-card">
+                      <div className="cart-item-icon">
+                        <Tent size={26} />
+                      </div>
+                      <div className="cart-item-info">
+                        <h4>{item.name}</h4>
+                        <div className="cart-item-price">
+                          {formatRupiah(item.price)} <span className="price-unit">/hari</span>
+                        </div>
+                        <div className="cart-item-controls">
+                          <button onClick={() => updateCartQty(item.id, -1)} className="qty-btn">
+                            <Minus size={14} />
+                          </button>
+                          <span className="qty-value">{item.qty}</span>
+                          <button onClick={() => updateCartQty(item.id, 1)} className="qty-btn">
+                            <Plus size={14} />
+                          </button>
+                          <button onClick={() => removeCartItem(item.id)} className="delete-btn" title="Hapus">
+                            <Trash2 size={15} />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="cart-item-subtotal">
+                        {formatRupiah(item.price * item.qty)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Footer Keranjang & Checkout / Booking */}
+            {cartItems.length > 0 && (
+              <div className="cart-drawer-footer">
+                <div className="cart-summary-row">
+                  <span>Total Estimasi Sewa:</span>
+                  <span className="cart-grand-total">{formatRupiah(totalCartPrice)}</span>
+                </div>
+                <p className="cart-promo-hint">
+                  💡 Ingat: Sewa 3 hari otomatis hanya bayar 2 hari saat konfirmasi ke toko!
+                </p>
+                <div className="cart-checkout-actions">
+                  <a
+                    href={`https://wa.me/6281234567890?text=${encodeURIComponent(
+                      `Halo Sabana Adventure, saya ingin sewa alat:\n` +
+                      cartItems.map(i => `- ${i.name} (${i.qty} unit)`).join('\n') +
+                      `\nTotal: ${formatRupiah(totalCartPrice)}/hari.`
+                    )}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="cart-checkout-wa"
+                  >
+                    <Send size={16} /> Pesan via WhatsApp
+                  </a>
+                  <button
+                    onClick={() => {
+                      setIsCartOpen(false);
+                      setIsChatOpen(true);
+                    }}
+                    className="cart-checkout-ai"
+                  >
+                    <MessageSquare size={16} /> Konsultasi ke AI
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* 8. FOOTER E-COMMERCE */}
       <footer className="main-footer">
         <div className="footer-content">
           <div className="footer-col">
@@ -565,7 +724,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* 8. TOMBOL TRIGGER WIDGET CHAT MELAYANG */}
+      {/* 9. TOMBOL TRIGGER WIDGET CHAT MELAYANG */}
       {!isChatOpen && (
         <button
           onClick={() => setIsChatOpen(true)}
@@ -576,7 +735,7 @@ export default function App() {
         </button>
       )}
 
-      {/* 9. KOMPONEN WIDGET CHAT AI */}
+      {/* 10. KOMPONEN WIDGET CHAT AI */}
       <ChatWidget
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
