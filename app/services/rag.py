@@ -15,6 +15,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Literal, overload
 
 import numpy as np
 from rapidfuzz import fuzz
@@ -203,6 +204,21 @@ class RAGService:
         if self.llm_client is None:
             self.llm_client = get_llm_client()
         return self.llm_client
+
+    @overload
+    def ask(
+        self, question: str, return_fallback: Literal[False] = False
+    ) -> tuple[str, list[str], float, bool]: ...
+
+    @overload
+    def ask(
+        self, question: str, return_fallback: Literal[True]
+    ) -> tuple[str, list[str], float, bool, bool]: ...
+
+    @overload
+    def ask(
+        self, question: str, return_fallback: bool
+    ) -> tuple[str, list[str], float, bool] | tuple[str, list[str], float, bool, bool]: ...
 
     def ask(
         self, question: str, return_fallback: bool = False
