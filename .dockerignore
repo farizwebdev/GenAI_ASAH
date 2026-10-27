@@ -1,0 +1,34 @@
+# Berkas lingkungan dan rahasia
+.env
+.env.*
+!.env.example
+
+# Lingkungan virtual Python
+.venv/
+venv/
+ENV/
+env/
+
+# Cache Python dan kompilasi
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.ruff_cache/
+
+# Berkas Git dan Version Control
+.git/
+.gitignore
+
+# Pengujian dan Laporan lokal
+tests/
+reports/
+scratch/
+*.log
+
+# Dokumentasi dan Editor
+.vscode/
+.idea/
+*.md
+!README.md

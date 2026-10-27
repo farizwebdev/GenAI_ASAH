@@ -39,6 +39,15 @@ format:
 run:
 	uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
+docker-build:
+	docker build -t sabana-genai-service:latest .
+
+docker-run:
+	docker run -d -p 8000:8000 --env-file .env --name sabana-genai sabana-genai-service:latest
+
+warmup:
+	python scripts/warmup.py
+
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type d -name ".pytest_cache" -exec rm -rf {} +
