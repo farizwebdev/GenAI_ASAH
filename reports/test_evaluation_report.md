@@ -1,7 +1,8 @@
 # Laporan Evaluasi Data Uji Final (T-10)
 
 Diproduksi otomatis oleh `app/training/evaluate.py` sesuai PRD Bagian 11 (T-10).
-Evaluasi dilakukan murni pada data uji (*test split*) yang tidak pernah disentuh saat pelatihan.
+Evaluasi dilakukan murni pada data uji (*test split*) yang tidak pernah disentuh
+saat proses pelatihan.
 
 ## 1. Ringkasan Metrik Evaluasi Data Uji
 
@@ -9,7 +10,7 @@ Evaluasi dilakukan murni pada data uji (*test split*) yang tidak pernah disentuh
 - **Jumlah Sampel Uji:** 96
 - **Test Macro-F1:** `0.9889`
 - **Test Weighted-F1:** `0.9896`
-- **Latensi Inferensi:** `0.179 ms/sampel`
+- **Latensi Inferensi:** `0.141 ms/sampel`
 
 ## 2. Rincian Metrik per Kelas
 

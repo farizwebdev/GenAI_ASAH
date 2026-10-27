@@ -3,7 +3,7 @@
   "n_test_samples": 96,
   "macro_f1": 0.9889,
   "weighted_f1": 0.9896,
-  "latency_ms_per_sample": 0.179,
+  "latency_ms_per_sample": 0.141,
   "classification_report": {
     "booking_sewa": {
       "precision": 0.9444444444444444,
@@ -93,5 +93,5 @@
     "tanya_info",
     "ubah_batal"
   ],
-  "evaluated_at": "2026-10-27T10:04:22Z"
+  "evaluated_at": "2026-10-27T10:06:28Z"
 }
