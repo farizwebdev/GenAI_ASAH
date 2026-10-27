@@ -4,10 +4,37 @@ import {
   MessageSquare, ChevronLeft, ChevronRight, Star, Flame, 
   ShieldCheck, Clock, CheckCircle2, Tag, Filter, Sparkles,
   ArrowRight, Shield, Zap, ThumbsUp, PackageCheck, X, Trash2,
-  Plus, Minus, ShoppingCart, Send
+  Plus, Minus, ShoppingCart, Send, MapPin, Award
 } from 'lucide-react';
 import ChatWidget from './components/ChatWidget';
 import './App.css';
+
+// Komponen Ikon Media Sosial Resmi Sabana Adventure
+const TikTokIcon = ({ size = 17 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.78 4.49 6.27 6.27 0 0 0 1.9-4.48V8.55a8.29 8.29 0 0 0 4.79 1.54V6.69z"/>
+  </svg>
+);
+
+const InstagramIcon = ({ size = 17 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
+
+const WhatsAppIcon = ({ size = 17 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.05 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+);
+
+const FacebookIcon = ({ size = 17 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </svg>
+);
 
 export default function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -690,46 +717,111 @@ export default function App() {
         </div>
       )}
 
-      {/* 8. FOOTER E-COMMERCE */}
+      {/* 8. FOOTER RESMI SABANA ADVENTURE (CLEAN, ELEGAN & PROFESIONAL) */}
       <footer className="main-footer">
-        <div className="footer-content">
-          <div className="footer-col">
-            <div className="footer-brand">
-              <Tent size={24} />
-              <h3>Sabana Adventure</h3>
+        <div className="footer-content-clean">
+          {/* Kolom 1: Profil Toko & Jaminan Kualitas */}
+          <div className="clean-footer-col">
+            <div className="clean-footer-brand">
+              <div className="clean-brand-icon">
+                <Tent size={22} />
+              </div>
+              <div>
+                <h3 className="clean-brand-name">Sabana Adventure</h3>
+                <span className="clean-brand-tag">Persewaan Alat Camping &bull; Jombor, Sleman</span>
+              </div>
             </div>
-            <p className="footer-desc">
-              Pusat persewaan alat outdoor, camping, dan pendakian gunung terlengkap di Jombor, Sleman, Yogyakarta.
+            <p className="clean-footer-text">
+              Pusat rental perlengkapan camping dan pendakian gunung terlengkap di Sleman, D.I. Yogyakarta sejak 2020. Peralatan steril, bersih, dan siap badai.
             </p>
-            <div className="footer-info-item">
-              <Phone size={15} />
-              <span>WhatsApp Admin: 0812-3456-7890</span>
+          </div>
+
+          {/* Kolom 2: Lokasi Toko */}
+          <div className="clean-footer-col">
+            <h4 className="clean-col-title">Lokasi Toko</h4>
+            <div className="simple-location-block">
+              <div className="simple-info-row">
+                <MapPin size={18} className="simple-info-icon" />
+                <div className="simple-info-content">
+                  <span className="simple-info-label">Alamat Toko</span>
+                  <p className="simple-info-text">
+                    Jl. Ringroad Utara No.163, Jombor Kidul, Sinduadi, Mlati, Sleman, DIY 55284
+                  </p>
+                </div>
+              </div>
+
+              <div className="simple-info-row">
+                <Clock size={18} className="simple-info-icon" />
+                <div className="simple-info-content">
+                  <span className="simple-info-label">Jam Operasional</span>
+                  <p className="simple-info-text">
+                    Buka Setiap Hari: <b>08.00 – 21.00 WIB</b>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="footer-col">
-            <h4>Kebijakan & Syarat Sewa</h4>
-            <ul>
-              <li>Sewa 3 hari dihitung tarif 2 hari</li>
-              <li>Jaminan fisik KTP / SIM asli berlaku</li>
-              <li>Pengambilan barang H-1 sore hari</li>
-              <li>Wajib konfirmasi sebelum pengembalian</li>
-            </ul>
-          </div>
-
-          <div className="footer-col">
-            <h4>Didukung Teknologi Gen AI</h4>
-            <p className="footer-desc">
-              Asisten virtual pintar berbasis Retrieval-Augmented Generation (RAG) untuk menjawab pertanyaan seputar katalog dan menghitung tarif sewa otomatis.
+          {/* Kolom 3: Media Sosial Resmi (Hanya Logo) */}
+          <div className="clean-footer-col">
+            <h4 className="clean-col-title">Media Sosial Resmi</h4>
+            <p className="clean-footer-text">
+              Ikuti akun media sosial resmi kami untuk melihat dokumentasi perlengkapan, video review, dan update promo:
             </p>
-            <button onClick={() => setIsChatOpen(true)} className="footer-chat-btn">
-              <MessageSquare size={16} /> Buka Chat AI Asisten
-            </button>
+            <div className="social-icons-row">
+              <a 
+                href="https://www.tiktok.com/@sabanaadventure" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="social-circle-btn"
+                title="TikTok @sabanaadventure"
+                aria-label="TikTok"
+              >
+                <TikTokIcon size={20} />
+              </a>
+
+              <a 
+                href="https://www.instagram.com/sabana_adventure" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="social-circle-btn"
+                title="Instagram @sabana_adventure"
+                aria-label="Instagram"
+              >
+                <InstagramIcon size={20} />
+              </a>
+
+              <a 
+                href="https://wa.me/6281234567890" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="social-circle-btn"
+                title="WhatsApp CS (0812-3456-7890)"
+                aria-label="WhatsApp"
+              >
+                <WhatsAppIcon size={20} />
+              </a>
+
+              <a 
+                href="https://www.facebook.com/sabanaadventurejogja" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="social-circle-btn"
+                title="Facebook Sabana Adventure Jogja"
+                aria-label="Facebook"
+              >
+                <FacebookIcon size={20} />
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <p>&copy; 2026 Sabana Adventure Jombor. Tim A26-CS204 Capstone Project Gen AI.</p>
+        {/* Footer Bottom Bar Bersih & Rapi */}
+        <div className="clean-footer-bottom">
+          <p>&copy; {new Date().getFullYear()} <b>Sabana Adventure Jombor</b>. Seluruh Hak Cipta Dilindungi.</p>
+          <p className="clean-credits">
+            Penyewaan Alat Outdoor &amp; Camping Terpercaya di Sleman, Yogyakarta
+          </p>
         </div>
       </footer>
 
