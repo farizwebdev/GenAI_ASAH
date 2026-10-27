@@ -24,6 +24,9 @@ evaluate-extractor:
 evaluate-rag:
 	python -m app.training.evaluate_rag
 
+evaluate-guardrails:
+	python -m app.training.evaluate_guardrails
+
 validate-data:
 	python scripts/validate_data.py
 
