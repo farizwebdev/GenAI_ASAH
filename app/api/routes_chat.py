@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends
 
+from app.core.errors import InvalidInputError
 from app.core.security import verify_service_key
 from app.schemas.chat import (
     AskRequest,
@@ -37,6 +38,11 @@ router = APIRouter(
 )
 async def chat_message(request: ChatRequest) -> ChatResponse:
     """Endpoint utama untuk seluruh interaksi pesan chat toko."""
+    if not request.message.strip():
+        raise InvalidInputError(
+            message_user="Pesan tidak boleh kosong.",
+            message_dev="Pesan kosong atau hanya berisi spasi",
+        )
     return get_router().route_message(request)
 
 

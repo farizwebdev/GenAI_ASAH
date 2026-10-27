@@ -165,6 +165,27 @@ async def validation_error_handler(
 ) -> JSONResponse:
     """Handler FastAPI untuk error validasi input Pydantic."""
     req_id = getattr(request.state, "request_id", None) or request_id_ctx.get()
+
+    # PRD 8.4: Pesan kosong atau > 1000 karakter menghasilkan HTTP 400 invalid_input
+    is_length_error = False
+    for error in exc.errors():
+        loc = error.get("loc", ())
+        err_type = error.get("type", "")
+        if any(k in loc for k in ("message", "question")):
+            if "string_too_short" in err_type or "string_too_long" in err_type:
+                is_length_error = True
+                break
+
+    if is_length_error:
+        inv_err = InvalidInputError(
+            message_user="Pesan tidak valid. Pesan tidak boleh kosong dan maksimal 1000 karakter.",
+            message_dev=str(exc.errors()),
+        )
+        return JSONResponse(
+            status_code=400,
+            content=inv_err.to_dict(request_id=req_id),
+        )
+
     err = ValidationError(
         message_user="Data permintaan tidak valid atau tidak lengkap.",
         message_dev=str(exc.errors()),

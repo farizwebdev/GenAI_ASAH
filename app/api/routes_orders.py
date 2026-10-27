@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends
 
+from app.core.errors import InvalidInputError
 from app.core.security import verify_service_key
 from app.schemas.order import ExtractedOrder, ExtractOrderRequest
 from app.services.extractor import get_order_extractor
@@ -26,6 +27,11 @@ router = APIRouter(
 )
 async def extract_order(request: ExtractOrderRequest) -> ExtractedOrder:
     """Endpoint ekstraksi pesanan langsung untuk staf toko."""
+    if not request.message.strip():
+        raise InvalidInputError(
+            message_user="Pesan tidak boleh kosong.",
+            message_dev="Pesan kosong atau hanya berisi spasi",
+        )
     extractor = get_order_extractor()
     extracted_order, fallback_used = extractor.extract(
         request.message,
