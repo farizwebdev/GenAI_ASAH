@@ -478,14 +478,18 @@ export default function App() {
               </div>
               <h2 className="catalog-main-title">Rekomendasi Alat Camping Pilihan</h2>
               <p className="catalog-sub-title">
-                Geser ke kanan untuk melihat seluruh alat &bull; Tersedia <b>{filteredProducts.length}</b> peralatan
+                {filteredProducts.length >= 6 ? (
+                  <>Geser ke kanan untuk melihat seluruh alat &bull; Tersedia <b>{filteredProducts.length}</b> peralatan</>
+                ) : (
+                  <>Tersedia <b>{filteredProducts.length}</b> peralatan pilihan siap sewa</>
+                )}
               </p>
             </div>
           </div>
 
-          {/* Wrapper Slider Horizontal dengan Tombol Melayang Samping */}
+          {/* Wrapper Slider Horizontal dengan Tombol Melayang Samping (Hanya jika >= 6 barang) */}
           <div className="catalog-slider-wrapper">
-            {filteredProducts.length > 0 && (
+            {filteredProducts.length >= 6 && (
               <button 
                 onClick={() => scrollCatalog('left')}
                 className="catalog-floating-arrow arrow-left"
@@ -569,7 +573,7 @@ export default function App() {
               </div>
             )}
 
-            {filteredProducts.length > 0 && (
+            {filteredProducts.length >= 6 && (
               <button 
                 onClick={() => scrollCatalog('right')}
                 className="catalog-floating-arrow arrow-right"
