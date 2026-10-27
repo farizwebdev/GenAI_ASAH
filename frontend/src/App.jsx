@@ -330,21 +330,20 @@ export default function App() {
             </div>
           </div>
 
-          {/* User & Cart Actions (Hanya Keranjang Produk) */}
+          {/* User & Cart Actions (Hanya Keranjang Produk - Tanpa Label Nominal Rp 0) */}
           <div className="header-actions">
             <div 
               className="cart-action-btn" 
               onClick={() => setIsCartOpen(true)} 
               title="Buka Keranjang Sewa"
+              role="button"
+              tabIndex={0}
             >
               <div className="cart-icon-wrapper">
-                <ShoppingCart size={22} />
+                <ShoppingCart size={21} />
                 {totalCartCount > 0 && <span className="cart-badge">{totalCartCount}</span>}
               </div>
-              <div className="cart-text-group">
-                <span className="btn-label-cart">Keranjang</span>
-                <span className="cart-total-preview">{formatRupiah(totalCartPrice)}</span>
-              </div>
+              <span className="btn-label-cart">Keranjang</span>
             </div>
           </div>
         </div>
@@ -486,14 +485,16 @@ export default function App() {
 
           {/* Wrapper Slider Horizontal dengan Tombol Melayang Samping */}
           <div className="catalog-slider-wrapper">
-            <button 
-              onClick={() => scrollCatalog('left')}
-              className="catalog-floating-arrow arrow-left"
-              aria-label="Geser ke kiri"
-              title="Geser ke kiri"
-            >
-              <ChevronLeft size={22} />
-            </button>
+            {filteredProducts.length > 0 && (
+              <button 
+                onClick={() => scrollCatalog('left')}
+                className="catalog-floating-arrow arrow-left"
+                aria-label="Geser ke kiri"
+                title="Geser ke kiri"
+              >
+                <ChevronLeft size={24} strokeWidth={2.5} />
+              </button>
+            )}
 
             {filteredProducts.length === 0 ? (
               <div className="empty-catalog">
@@ -503,8 +504,7 @@ export default function App() {
                 </button>
               </div>
             ) : (
-              <>
-                <div className="products-horizontal-slider" ref={catalogScrollRef}>
+              <div className="products-horizontal-slider" ref={catalogScrollRef}>
                 {filteredProducts.map((item) => (
                   <div key={item.id} className="shopee-card">
                     {/* Gambar / Visual Mockup Produk */}
@@ -520,65 +520,66 @@ export default function App() {
                       </div>
                     </div>
 
-                  {/* Body Kartu Produk */}
-                  <div className="shopee-card-content">
-                    {/* Judul Produk */}
-                    <h3 className="shopee-title" title={item.name}>
-                      {item.name}
-                    </h3>
+                    {/* Body Kartu Produk */}
+                    <div className="shopee-card-content">
+                      {/* Judul Produk */}
+                      <h3 className="shopee-title" title={item.name}>
+                        {item.name}
+                      </h3>
 
-                    {/* Tag Fitur Singkat */}
-                    <div className="shopee-tags-row">
-                      {item.tags.slice(0, 2).map((tag, idx) => (
-                        <span key={idx} className="shopee-mini-tag">{tag}</span>
-                      ))}
-                    </div>
-
-                    {/* Harga Coret & Harga Sewa */}
-                    <div className="shopee-price-container">
-                      <div className="shopee-strike-row">
-                        <span className="shopee-original-price">{formatRupiah(item.originalPrice)}</span>
-                        <span className="shopee-disc-badge">HEMAT</span>
+                      {/* Tag Fitur Singkat */}
+                      <div className="shopee-tags-row">
+                        {item.tags.slice(0, 2).map((tag, idx) => (
+                          <span key={idx} className="shopee-mini-tag">{tag}</span>
+                        ))}
                       </div>
-                      <div className="shopee-price-main">
-                        <span className="shopee-currency">Rp</span>
-                        <span className="shopee-amount">{(item.price).toLocaleString('id-ID')}</span>
-                        <span className="shopee-per-day">/hari</span>
-                      </div>
-                    </div>
 
-                    {/* Rating Bintang & Terjual / Tersewa */}
-                    <div className="shopee-metrics-row">
-                      <div className="shopee-rating">
-                        <Star size={12} className="star-shopee" />
-                        <span>{item.rating}</span>
+                      {/* Harga Coret & Harga Sewa */}
+                      <div className="shopee-price-container">
+                        <div className="shopee-strike-row">
+                          <span className="shopee-original-price">{formatRupiah(item.originalPrice)}</span>
+                          <span className="shopee-disc-badge">HEMAT</span>
+                        </div>
+                        <div className="shopee-price-main">
+                          <span className="shopee-currency">Rp</span>
+                          <span className="shopee-amount">{(item.price).toLocaleString('id-ID')}</span>
+                          <span className="shopee-per-day">/hari</span>
+                        </div>
                       </div>
-                      <span className="shopee-sold">{item.soldCount} Tersewa</span>
-                    </div>
 
-                    {/* Tombol Sewa Cepat */}
-                    <button 
-                      onClick={() => handleAddToCart(item)}
-                      className="shopee-btn-rent"
-                    >
-                      + Sewa Sekarang
-                    </button>
+                      {/* Rating Bintang & Terjual / Tersewa */}
+                      <div className="shopee-metrics-row">
+                        <div className="shopee-rating">
+                          <Star size={12} className="star-shopee" />
+                          <span>{item.rating}</span>
+                        </div>
+                        <span className="shopee-sold">{item.soldCount} Tersewa</span>
+                      </div>
+
+                      {/* Tombol Sewa Cepat */}
+                      <button 
+                        onClick={() => handleAddToCart(item)}
+                        className="shopee-btn-rent"
+                      >
+                        + Sewa Sekarang
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
+            {filteredProducts.length > 0 && (
               <button 
                 onClick={() => scrollCatalog('right')}
                 className="catalog-floating-arrow arrow-right"
                 aria-label="Geser ke kanan"
                 title="Geser ke kanan"
               >
-                <ChevronRight size={22} />
+                <ChevronRight size={24} strokeWidth={2.5} />
               </button>
-            </>
-          )}
-        </div>
+            )}
+          </div>
       </div>
     </main>
 
