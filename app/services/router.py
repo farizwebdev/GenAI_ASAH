@@ -115,7 +115,7 @@ class RouterService:
         channel = request.channel
         message = request.message.strip()
 
-        model_version: str | None = None
+        model_version = "intent-e1-v1"
         if self.classifier.artifact:
             model_version = str(self.classifier.artifact.get("model_name", "intent-e1-v1"))
 
@@ -209,7 +209,7 @@ class RouterService:
         intent: IntentEnum,
         confidence: float,
         is_low_conf: bool,
-        model_version: str | None,
+        model_version: str,
         start_time: float,
     ) -> ChatResponse:
         """Menangani perutean untuk web_widget dan bot telegram."""
@@ -219,6 +219,7 @@ class RouterService:
         result: ExtractedOrder | None = None
         sources: list[str] = []
         prompt_version: str | None = None
+        fallback_used = False
 
         if intent == IntentEnum.booking_sewa:
             # PRD 6.9: Arahkan memilih alat di katalog dan keranjang. action={"type":"open_catalog"}
@@ -229,7 +230,9 @@ class RouterService:
         elif intent == IntentEnum.tanya_info:
             # PRD 6.9: route=answer_info -> RAG
             route = RouteEnum.answer_info
-            rag_reply, rag_sources, top_score, forwarded = self.rag.ask(message)
+            rag_reply, rag_sources, top_score, forwarded, fallback_used = self.rag.ask(
+                message, return_fallback=True
+            )
             reply_text = rag_reply
             sources = rag_sources
             prompt_version = "rag_v1"
@@ -269,7 +272,7 @@ class RouterService:
                 model_version=model_version,
                 prompt_version=prompt_version,
                 latency_ms=latency_ms,
-                fallback_used=False,
+                fallback_used=fallback_used,
                 low_confidence=is_low_conf,
                 sentiment=None,
             ),
@@ -283,7 +286,7 @@ class RouterService:
         confidence: float,
         is_low_conf: bool,
         reference_date: str | None,
-        model_version: str | None,
+        model_version: str,
         start_time: float,
     ) -> ChatResponse:
         """Menangani perutean untuk panel admin staff_paste."""
@@ -308,7 +311,9 @@ class RouterService:
         elif intent == IntentEnum.tanya_info:
             # PRD 6.9: route=suggest_reply -> RAG menghasilkan saran balasan untuk disalin staf
             route = RouteEnum.suggest_reply
-            rag_reply, rag_sources, top_score, forwarded = self.rag.ask(message)
+            rag_reply, rag_sources, top_score, forwarded, fallback_used = self.rag.ask(
+                message, return_fallback=True
+            )
             reply_text = rag_reply
             sources = rag_sources
             prompt_version = "rag_v1"

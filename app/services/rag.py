@@ -204,24 +204,29 @@ class RAGService:
             self.llm_client = get_llm_client()
         return self.llm_client
 
-    def ask(self, question: str) -> tuple[str, list[str], float, bool]:
+    def ask(
+        self, question: str, return_fallback: bool = False
+    ) -> tuple[str, list[str], float, bool] | tuple[str, list[str], float, bool, bool]:
         """Menjawab pertanyaan informasi toko menggunakan pipeline RAG.
 
         Args:
             question: Pertanyaan teks dari pelanggan.
+            return_fallback: Jika True, kembalikan tuple 5 elemen termasuk fallback_used boolean.
 
         Returns:
-            tuple: (reply_text, sources, top_score, forwarded_to_staff)
+            tuple: (reply_text, sources, top_score, forwarded_to_staff) atau
+                   (reply_text, sources, top_score, forwarded_to_staff, fallback_used)
+                   jika return_fallback=True.
         """
         top_chunks = self.vector_store.search(question, top_k=3)
         if not top_chunks:
-            return (
+            msg = (
                 "Halo Kak, mohon maaf untuk pertanyaan tersebut akan kami teruskan ke pegawai "
-                "toko agar dapat dibantu lebih lanjut ya.",
-                [],
-                0.0,
-                True,
+                "toko agar dapat dibantu lebih lanjut ya."
             )
+            if return_fallback:
+                return msg, [], 0.0, True, False
+            return msg, [], 0.0, True
 
         top_score = top_chunks[0][1]
 
@@ -232,13 +237,13 @@ class RAGService:
                 f"Skor retrieval RAG ({top_score:.3f}) di bawah ambang {self.min_score}. "
                 "Pertanyaan diteruskan ke pegawai."
             )
-            return (
+            msg = (
                 "Halo Kak, mohon maaf untuk pertanyaan tersebut akan kami teruskan ke pegawai "
-                "toko agar dapat dibantu lebih lanjut ya.",
-                [],
-                top_score,
-                True,
+                "toko agar dapat dibantu lebih lanjut ya."
             )
+            if return_fallback:
+                return msg, [], top_score, True, False
+            return msg, [], top_score, True
 
         sources = [c.id for c, _ in top_chunks]
         top_chunk = top_chunks[0][0]
@@ -251,6 +256,8 @@ class RAGService:
                 "dicek langsung melalui katalog website kami atau ditanyakan ke pegawai toko ya. "
                 "Asisten tidak dapat memastikan ketersediaan stok."
             )
+            if return_fallback:
+                return reply, ["KB-09"], top_score, False, False
             return reply, ["KB-09"], top_score, False
 
         # Aturan Khusus 2: Potongan mengandung [ISI ...] dan ditanyakan nominal/detailnya
@@ -261,6 +268,8 @@ class RAGService:
                 f"Halo Kak, terkait informasi detail mengenai {top_chunk.topik.replace('_', ' ')} "
                 "akan dikonfirmasi langsung oleh pegawai toko kami ya."
             )
+            if return_fallback:
+                return reply, sources[:1], top_score, False, False
             return reply, sources[:1], top_score, False
 
         # Format konteks untuk LLM
@@ -282,6 +291,8 @@ class RAGService:
             # Pastikan sapaan ramah diawali dengan Kak bila belum ada
             if not reply.startswith("Halo Kak") and not reply.startswith("Kak"):
                 reply = f"Halo Kak, {reply}"
+            if return_fallback:
+                return reply, sources, top_score, False, False
             return reply, sources, top_score, False
         except Exception as exc:
             logger.error(f"Gagal memanggil LLM untuk RAG: {exc}")
@@ -290,6 +301,8 @@ class RAGService:
                 f"Halo Kak, {top_chunk.content} "
                 "Untuk info lebih lengkap silakan hubungi pegawai toko ya."
             )
+            if return_fallback:
+                return fallback_reply, sources, top_score, False, True
             return fallback_reply, sources, top_score, False
 
 

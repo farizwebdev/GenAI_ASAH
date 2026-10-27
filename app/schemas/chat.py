@@ -9,15 +9,15 @@ from app.schemas.order import ExtractedOrder
 
 
 class ChatMeta(BaseModel):
-    """Metadata eksekusi untuk pencatatan dan evaluasi teknis."""
+    """Metadata eksekusi untuk pencatatan dan evaluasi teknis sesuai PRD Bagian 6.11 & 8.3."""
 
-    model_version: str | None = Field(
-        default=None,
+    model_version: str = Field(
+        default="intent-e1-v1",
         description="Versi model intent yang digunakan",
     )
     prompt_version: str | None = Field(
         default=None,
-        description="Versi template prompt sistem",
+        description="Versi template prompt sistem (misal rag_v1, extract_v1)",
     )
     latency_ms: int = Field(
         default=0,
@@ -26,16 +26,29 @@ class ChatMeta(BaseModel):
     )
     fallback_used: bool = Field(
         default=False,
-        description="Apakah fallback digunakan jika AI gagal",
+        description="Apakah fallback digunakan jika komponen AI gagal",
     )
     low_confidence: bool = Field(
         default=False,
-        description="Apakah keyakinan model di bawah ambang batas",
+        description="Apakah keyakinan model di bawah ambang batas minimum",
     )
     sentiment: str | None = Field(
         default=None,
-        description="Sentimen pesan pelanggan (fitur P2)",
+        description="Sentimen pesan pelanggan (fitur P2, misal positif/negatif/netral)",
     )
+
+    model_config = {
+        "json_schema_extra": {
+            "example": {
+                "model_version": "intent-e1-v1",
+                "prompt_version": "rag_v1",
+                "latency_ms": 1380,
+                "fallback_used": False,
+                "low_confidence": False,
+                "sentiment": None,
+            }
+        }
+    }
 
 
 class ChatAction(BaseModel):
