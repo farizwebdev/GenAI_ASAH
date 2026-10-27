@@ -15,6 +15,9 @@ tune:
 report:
 	python -m app.training.evaluate
 
+train-matcher:
+	python -m app.training.train_matcher
+
 validate-data:
 	python scripts/validate_data.py
 
