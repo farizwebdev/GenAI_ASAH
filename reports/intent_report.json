@@ -18,7 +18,7 @@
         "tanya_info": 1.0,
         "ubah_batal": 1.0
       },
-      "latency_ms_per_sample": 0.07
+      "latency_ms_per_sample": 0.041
     },
     "E2": {
       "val_macro_f1": 1.0,
@@ -30,7 +30,7 @@
         "tanya_info": 1.0,
         "ubah_batal": 1.0
       },
-      "latency_ms_per_sample": 0.265
+      "latency_ms_per_sample": 0.056
     },
     "E3": {
       "val_macro_f1": 0.8013,
@@ -42,7 +42,7 @@
         "tanya_info": 0.8571,
         "ubah_batal": 0.8205
       },
-      "latency_ms_per_sample": 0.417
+      "latency_ms_per_sample": 0.705
     }
   },
   "confusion_matrix_best": [

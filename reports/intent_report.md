@@ -6,9 +6,9 @@ Diproduksi secara otomatis oleh `app/training/train_intent.py` sesuai PRD Bagian
 
 | Konfigurasi | Arsitektur | Val Macro-F1 | Test Macro-F1 | Latensi (ms) | Status |
 |---|---|---|---|---|---|
-| **E1** | TF-IDF + LogisticRegression | 1.0000 | 1.0000 | 0.070 ms | ⭐ **Terpilih** |
-| **E2** | TF-IDF + LinearSVC | 1.0000 | 1.0000 | 0.265 ms | Kandidat |
-| **E3** | Embedding + LogisticRegression | 0.8013 | 0.8593 | 0.417 ms | Kandidat |
+| **E1** | TF-IDF + LogisticRegression | 1.0000 | 1.0000 | 0.041 ms | ⭐ **Terpilih** |
+| **E2** | TF-IDF + LinearSVC | 1.0000 | 1.0000 | 0.056 ms | Kandidat |
+| **E3** | Embedding + LogisticRegression | 0.8013 | 0.8593 | 0.705 ms | Kandidat |
 
 *Model terbaik dipilih berdasarkan skor tertinggi pada dataset **Validation (Val)**.*
 
