@@ -23,7 +23,7 @@ class APIEmbedder(BaseEmbedder):
         timeout_s: float = 10.0,
     ) -> None:
         settings = get_settings()
-        self.api_key = api_key or settings.LLM_API_KEY
+        self.api_key = settings.LLM_API_KEY if api_key is None else api_key
         self.model = model or settings.EMBED_MODEL or "text-embedding-004"
         self.timeout_s = timeout_s
         self.endpoint = (

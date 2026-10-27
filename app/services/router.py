@@ -261,14 +261,28 @@ class RouterService:
 
         else:
             # intent == IntentEnum.lainnya
-            # PRD 6.9: route=refuse atau sapaan. Sapaan dijawab ramah, selebihnya ditolak sopan
+            # PRD 6.9: route=refuse atau sapaan. Sapaan dijawab ramah, selebihnya periksa guardrails
             guardrail_res = self.guardrails.validate_input(
                 message=message,
                 intent=intent.value,
                 confidence=confidence,
             )
-            route = RouteEnum.refuse
-            reply_text = guardrail_res.reply_text or DEFAULT_REFUSAL_MESSAGE
+            if guardrail_res.passed:
+                if guardrail_res.is_greeting_or_thanks:
+                    route = RouteEnum.refuse
+                    reply_text = guardrail_res.reply_text or DEFAULT_REFUSAL_MESSAGE
+                else:
+                    # Pertanyaan lolos guardrail (pertanyaan katalog toko dengan intent low-conf)
+                    route = RouteEnum.answer_info
+                    rag_reply, rag_sources, top_score, forwarded, fallback_used = self.rag.ask(
+                        message, return_fallback=True
+                    )
+                    reply_text = rag_reply
+                    sources = rag_sources
+                    prompt_version = "rag_v1"
+            else:
+                route = RouteEnum.refuse
+                reply_text = guardrail_res.reply_text or DEFAULT_REFUSAL_MESSAGE
 
         latency_ms = int((time.perf_counter() - start_time) * 1000)
         return ChatResponse(

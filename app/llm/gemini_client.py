@@ -30,7 +30,7 @@ class GeminiLLMClient(BaseLLMClient):
     ) -> None:
         super().__init__(timeout_s=timeout_s, enable_cache=enable_cache)
         settings = get_settings()
-        self.api_key = api_key or settings.LLM_API_KEY
+        self.api_key = settings.LLM_API_KEY if api_key is None else api_key
         self.model = model or settings.LLM_MODEL or "gemini-1.5-flash"
         self.max_retries = max_retries
         self.endpoint = (
