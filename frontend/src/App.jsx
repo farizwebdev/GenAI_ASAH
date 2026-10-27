@@ -186,9 +186,8 @@ export default function App() {
         <button
           onClick={() => setIsChatOpen(true)}
           className="floating-chat-trigger"
-          title="Tanya AI Asisten Toko"
+          title="Tanya Asisten Toko"
         >
-          <div className="floating-badge">AI Online</div>
           <MessageSquare size={26} />
         </button>
       )}

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { X, Send, Trash2, Tent, Sparkles, MessageSquare } from 'lucide-react';
+import { X, Send, Trash2, Tent, MessageSquare } from 'lucide-react';
 import './ChatWidget.css';
 
 const GENAI_API_URL = "http://127.0.0.1:8000/api/v1/chat/message";
@@ -119,7 +119,6 @@ export default function ChatWidget({ isOpen, onClose }) {
           <div>
             <div className="chat-title-row">
               <h3>Sabana AI Assistant</h3>
-              <Sparkles size={14} className="sparkle-icon" />
             </div>
             <div className="chat-status-row">
               <span className="online-badge" />
