@@ -36,6 +36,19 @@ const FacebookIcon = ({ size = 17 }) => (
   </svg>
 );
 
+// Helper render ikon produk berdasarkan kategori
+const renderProductIcon = (category) => {
+  switch (category) {
+    case 'tenda': return <Tent size={46} className="shopee-preview-icon" />;
+    case 'tas': return <ShoppingBag size={46} className="shopee-preview-icon" />;
+    case 'masak': return <Flame size={46} className="shopee-preview-icon" />;
+    case 'tidur': return <ShieldCheck size={46} className="shopee-preview-icon" />;
+    case 'penerangan': return <Zap size={46} className="shopee-preview-icon" />;
+    case 'alas_kaki': return <Compass size={46} className="shopee-preview-icon" />;
+    default: return <Tent size={46} className="shopee-preview-icon" />;
+  }
+};
+
 export default function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -538,53 +551,37 @@ export default function App() {
               <div className="products-horizontal-slider" ref={catalogScrollRef}>
                 {filteredProducts.map((item) => (
                   <div key={item.id} className="shopee-card">
-                    {/* Gambar / Visual Mockup Produk */}
+                    {/* Gambar / Visual Mockup Produk dengan Floating Trust Badges */}
                     <div className="shopee-card-media">
-                      <div className="shopee-top-badges">
-                        <span className="shopee-badge-mall">{item.badge}</span>
-                        <span className="shopee-badge-loc">{item.location}</span>
+                      <div className="shopee-media-badges">
+                        <div className="shopee-pill-rating" title={`Rating ${item.rating} dari 5`}>
+                          <Star size={11} className="star-shopee" />
+                          <span>{item.rating}</span>
+                        </div>
+                        <div className="shopee-pill-sold">
+                          <span>{item.soldCount} Tersewa</span>
+                        </div>
                       </div>
 
                       <div className="shopee-product-preview">
-                        <Tent size={52} className="shopee-preview-icon" />
-                        <span className="shopee-cat-tag">{item.category.toUpperCase()}</span>
+                        {renderProductIcon(item.category)}
                       </div>
                     </div>
 
-                    {/* Body Kartu Produk */}
+                    {/* Body Kartu Produk (Lega, Bersih & Proporsional) */}
                     <div className="shopee-card-content">
                       {/* Judul Produk */}
                       <h3 className="shopee-title" title={item.name}>
                         {item.name}
                       </h3>
 
-                      {/* Tag Fitur Singkat */}
-                      <div className="shopee-tags-row">
-                        {item.tags.slice(0, 2).map((tag, idx) => (
-                          <span key={idx} className="shopee-mini-tag">{tag}</span>
-                        ))}
-                      </div>
-
-                      {/* Harga Coret & Harga Sewa */}
+                      {/* Harga Sewa Utama (Clean & Bold) */}
                       <div className="shopee-price-container">
-                        <div className="shopee-strike-row">
-                          <span className="shopee-original-price">{formatRupiah(item.originalPrice)}</span>
-                          <span className="shopee-disc-badge">HEMAT</span>
-                        </div>
                         <div className="shopee-price-main">
                           <span className="shopee-currency">Rp</span>
                           <span className="shopee-amount">{(item.price).toLocaleString('id-ID')}</span>
                           <span className="shopee-per-day">/hari</span>
                         </div>
-                      </div>
-
-                      {/* Rating Bintang & Terjual / Tersewa */}
-                      <div className="shopee-metrics-row">
-                        <div className="shopee-rating">
-                          <Star size={12} className="star-shopee" />
-                          <span>{item.rating}</span>
-                        </div>
-                        <span className="shopee-sold">{item.soldCount} Tersewa</span>
                       </div>
 
                       {/* Tombol Sewa Cepat */}
