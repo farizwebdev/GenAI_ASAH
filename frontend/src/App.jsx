@@ -323,18 +323,18 @@ export default function App() {
 
   return (
     <div className="ecommerce-wrapper">
-      {/* 1. TOP ANNOUNCEMENT BAR */}
+      {/* 1. TOP ANNOUNCEMENT BAR (COMPACT & BALANCED) */}
       <div className="top-bar">
         <div className="top-bar-inner">
           <div className="top-bar-info">
-            <span className="top-tag">SABANA PROMO</span>
-            <span className="top-bar-promo-text">Sewa 3 Hari Bayar 2 Hari &bull; Ambil H-1 Sore Bebas Biaya Tambahan!</span>
+            <span className="top-tag">PROMO</span>
+            <span className="top-bar-promo-text">Sewa 3 Hari Bayar 2 Hari &bull; Bebas Biaya H-1</span>
           </div>
           <div className="top-bar-links">
             <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer" className="top-link">
-              <Phone size={13} /> CS WhatsApp: 0812-3456-7890
+              <Phone size={12} /> CS WA: 0812-3456-7890
             </a>
-            <span className="top-sep">|</span>
+            <span className="top-sep">&bull;</span>
             <span className="top-loc">Jombor, Sleman</span>
           </div>
         </div>

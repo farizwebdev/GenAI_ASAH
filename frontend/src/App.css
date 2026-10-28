@@ -14,10 +14,10 @@
 /* ---------------- 1. TOP ANNOUNCEMENT BAR ---------------- */
 .top-bar {
   background-color: var(--secondary);
-  color: #a1a1aa;
-  font-size: 0.75rem;
+  color: #d4d4d8;
+  font-size: 0.825rem;
   border-bottom: 2px solid var(--primary);
-  padding: 0.45rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .top-bar-inner {
@@ -27,25 +27,26 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.65rem;
 }
 
 .top-bar-info {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
   color: #f4f4f5;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.825rem;
 }
 
 .top-tag {
   background-color: var(--primary);
   color: var(--secondary);
-  font-weight: 800;
-  font-size: 0.65rem;
-  padding: 0.15rem 0.45rem;
+  font-weight: 900;
+  font-size: 0.685rem;
+  padding: 0.18rem 0.5rem;
   border-radius: 0.25rem;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 
 .top-bar-links {
@@ -1165,38 +1166,44 @@
 
 /* Tablet & Mobile (<= 768px) */
 @media (max-width: 768px) {
-  /* Top Bar Mobile (Rapi & Terstruktur) */
+  /* Top Bar Mobile (Ultra-Clean 1 Baris Fokus Promo - Nyaman & Jelas Dibaca) */
   .top-bar {
-    padding: 0.45rem 0.75rem;
+    padding: 0.42rem 0.75rem;
     width: 100%;
     overflow: hidden;
   }
   .top-bar-inner {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
-    gap: 0.25rem;
     width: 100%;
   }
   .top-bar-info {
-    font-size: 0.725rem;
+    font-size: 0.8rem;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    line-height: 1.35;
+    flex-wrap: nowrap;
+    gap: 0.45rem;
+    line-height: 1.25;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+  .top-tag {
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 0.14rem 0.45rem;
+    border-radius: 0.25rem;
+    flex-shrink: 0;
   }
   .top-bar-promo-text {
-    font-size: 0.725rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
   }
   .top-bar-links {
-    font-size: 0.685rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    display: none; /* Sembunyikan di mobile agar super ramping tepat 1 baris */
   }
 
   /* Header & Sticky Navbar */
@@ -1439,15 +1446,19 @@
 
 /* Smartphone Layar Kecil (<= 480px) */
 @media (max-width: 480px) {
+  .top-bar {
+    padding: 0.38rem 0.5rem;
+  }
   .top-bar-info {
-    flex-direction: column;
-    gap: 0.15rem;
+    font-size: 0.775rem;
+    gap: 0.4rem;
   }
-  .top-bar-links {
-    gap: 0.35rem;
+  .top-tag {
+    font-size: 0.625rem;
+    padding: 0.12rem 0.4rem;
   }
-  .top-sep {
-    display: none;
+  .top-bar-promo-text {
+    font-size: 0.775rem;
   }
   .trust-strip-container {
     grid-template-columns: 1fr;
