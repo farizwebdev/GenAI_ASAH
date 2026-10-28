@@ -109,14 +109,23 @@ export default function ChatWidget({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="chat-widget-container">
-      {/* Header Widget */}
-      <div className="chat-header">
-        <div className="chat-header-info">
-          <div className="chat-avatar">
-            <Tent size={22} />
-          </div>
-          <div>
+    <>
+      {/* Backdrop overlay khusus mobile: tap di luar untuk menutup */}
+      <div className="chat-backdrop" onClick={onClose} aria-hidden="true" />
+
+      <div className="chat-widget-container" role="dialog" aria-modal="true" aria-label="Asisten Sabana AI">
+        {/* Mobile Sheet Handle Bar */}
+        <div className="chat-sheet-handle-bar" onClick={onClose} title="Tutup Chat">
+          <span className="chat-sheet-handle-pill" />
+        </div>
+
+        {/* Header Widget */}
+        <div className="chat-header">
+          <div className="chat-header-info">
+            <div className="chat-avatar">
+              <Tent size={18} />
+            </div>
+            <div>
             <div className="chat-title-row">
               <h3>Sabana AI Assistant</h3>
             </div>
@@ -223,5 +232,6 @@ export default function ChatWidget({ isOpen, onClose }) {
         </form>
       </div>
     </div>
+    </>
   );
 }
